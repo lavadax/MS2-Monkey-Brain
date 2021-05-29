@@ -1,45 +1,176 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+<!-- PROJECT SHIELDS TODO-->
 
-Welcome Kevin Schepers,
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use.
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+    <a href="https://github.com/lavadax/MS2-Monkey-Brain">
+        <img src="assets/images/logo.png" alt="Logo" width="200" height="200">
+    </a>
 
-## Gitpod Reminders
+  ### Sheets Dojo
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+  <p align="center">
+    2nd milestone project for CodeInstitute course. This is focused on HTML, CSS and JS. subject of the project is based on the Ai Project from the Primate Research Institute in Kyoto.
+    <br />
+    <a href="https://github.com/lavadax/MS2-Monkey-Brain"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/lavadax/MS2-Monkey-Brain">View Demo</a>
+    ·
+    <a href="https://github.com/lavadax/MS2-Monkey-Brain/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/lavadax/MS2-Monkey-Brain/issues">Request Feature</a>
+  </p>
+</p>
 
-`python3 -m http.server`
 
-A blue button should appear to click: *Make Public*,
 
-Another blue button should appear to click: *Open Browser*.
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+    <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
+    <ol>
+        <li>
+            <a href="#about-the-project">About The Project</a>
+            <ul>
+            <li><a href="#built-with">Built With</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#getting-started">Getting Started</a>
+            <ul>
+            <li><a href="#installation">Installation</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#usage">Usage</a>
+            <ul>
+            <li><a href="#wireframes">Wireframes</a></li>
+            <li><a href="#user-stories">User Stories</a></li>
+            </ul></li>
+        <li>
+            <a href="#roadmap">Roadmap</a>
+            <ul>
+                <li><a href="#future-plans">Future Plans</a></li>
+                <li><a href="#open-issues">Open Issues</a></li>
+                <li><a href="#past-issues">Past issues</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#testing">Testing</a>
+            <ul>
+                <li><a href="#functional-testing">Functional Testing</a></li>
+                <li><a href="#accessibility-testing">Accessibility Testing</a></li>
+            </ul>
+        </li>
+        <li><a href="#contributing">Contributing</a></li>
+        <li><a href="#license">License</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#acknowledgements">Acknowledgements</a></li>
+    </ol>
+</details>
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
 
-A blue button should appear to click: *Make Public*,
 
-Another blue button should appear to click: *Open Browser*.
+<!-- ABOUT THE PROJECT-->
+## About The Project
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+<!-- TODO add screenshots of finished project-->
 
-## Updates Since The Instructional Video
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+### Built With
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+* [Bootstrap 4.6](https://getbootstrap.com/) - Used to assist responsiveness and streamline the positioning & styling of the site.
+* [Gitpod](https://www.gitpod.io/) / [Gitpod Chrome extension](https://chrome.google.com/webstore/detail/gitpod-dev-environments-i/dodmmooeoklaejobgleioelladacbeki) - Used to develop the site and push the project to Github.
+* [FontAwesome](https://fontawesome.com/) - Used to add icons for social media links.
+* [GitHub](https://github.com) - Used to host the project during and after development.
+* [MockFlow](https://mockflow.com/) - Used to set up the wireframes at the start of the dev cycle.
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+<!-- GETTING STARTED TODO expand on this-->
+## Getting Started
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+To get a local copy up and running follow these simple steps.
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+### Installation
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+1. Clone the repo
+   ```sh
+   git clone https://github.com/lavadax/MS2-Monkey-Brain.git
+   ```
 
---------
+<!-- USAGE EXAMPLES -->
+## Usage
 
-Happy coding!
+### Wireframes
+
+All wireframes are in a single file and can be found [here](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/ms2-wireframes.pdf).
+
+### User Stories
+
+#### New Users
+
+* As a new user, I want to easily understand the purpose of the site.
+* As a new user, I want to be able to easily navigate the site and access the content it provides.
+
+#### Returning Users
+
+* As a returning user, I want to easily return to where I left off previously.
+* As a returning user, I want to easily check my progress so far.
+* As a returning user, I want the possibility of accessing my previous data on new devices.
+
+<!-- ROADMAP TODO-->
+## Roadmap
+
+### Future Plans
+
+
+### Open Issues
+
+See the [open issues](https://github.com/lavadax/MS2-Monkey-Brain/issues) for a list of proposed features (and known issues).
+
+### Past issues
+
+
+<!-- TESTING TODO-->
+## Testing
+
+### Functional Testing
+
+### Accessibility Testing
+
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See [`LICENSE`](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/LICENSE.txt) for more information.
+
+
+
+<!-- CONTACT -->
+## Contact
+
+Lavadax - [Twitter](https://twitter.com/LavadaxTwitch) - [facebook](https://www.facebook.com/Lavadax)
+
+Project Link: [https://github.com/lavadax/MS2-Monkey-Brain](https://github.com/lavadax/MS2-Monkey-Brain)
+
+
+
+<!-- ACKNOWLEDGEMENTS TODO-->
+## Acknowledgements
+
+* [https://github.com/othneildrew](https://github.com/othneildrew/Best-README-Template) for providing the readme template.
