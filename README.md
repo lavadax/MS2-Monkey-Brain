@@ -8,7 +8,7 @@
         <img src="assets/images/logo.png" alt="Logo" width="200" height="200">
     </a>
 
-  ### Sheets Dojo
+  ### Monkey Brain
 
   <p align="center">
     2nd milestone project for CodeInstitute course. This is focused on HTML, CSS and JS. subject of the project is based on the Ai Project from the Primate Research Institute in Kyoto.
