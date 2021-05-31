@@ -105,7 +105,7 @@ To get a local copy up and running follow these simple steps.
 
 ### Wireframes
 
-All wireframes are in a single file and can be found [here](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/ms2-wireframes.pdf).
+All wireframes are in a single file and can be found [here](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/ms2-wireframe.pdf).
 
 ### User Stories
 
