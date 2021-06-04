@@ -235,3 +235,4 @@ Project Link: [https://github.com/lavadax/MS2-Monkey-Brain](https://github.com/l
 * [https://github.com/othneildrew](https://github.com/othneildrew/Best-README-Template): for providing the readme template.
 * [https://github.com/Code-Institute-Solutions](https://github.com/Code-Institute-Solutions/SampleREADME): for filling in gaps in the readme template.
 * [https://github/com/lavadax](https://github.com/lavadax/MS1-Sheets-Dojo): overall styling from first milestone project used as a template for current project.
+* [https://w3schools.com](https://www.w3schools.com/html/html5_canvas.asp): for instructions on how to use a canvas and draw on it.
