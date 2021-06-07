@@ -53,7 +53,7 @@ header {
     display: block;
     margin: auto;
     width: 100%;
-    height: 100%;
+    height: 400px; /* TODO static size used for testing, will have to be made more responsive down the line */
     max-width: 800px;
     max-height: 400px;
     border: 3px solid black;
