@@ -121,47 +121,19 @@ footer p {
     .main-content {
         padding: calc((100vh - 700px)/2) 10%;
     }
-
-    .footer-row div p {
-        font-size: 15px;
-    }
-
-    .fab {
-        font-size: 0.9em;
-    }
 }
 
-@media screen and (max-width: 697.8px) { /* copyright text takes up 2 lines at this point, causing padding to overflow */
-    .copyright {
-        padding-top: 10px;
-    }
-}
+
 
 @media screen and (max-width: 575.8px) {
     .main-content {
         padding: calc((100vh - 740px)/2) 10%;
-    }
-
-    .footer-row div p {
-        font-size: 14px;
-    }
-
-    .fab {
-        font-size: 0.8em;
     }
 }
 
 @media screen and (max-width: 450.8px) {
     .main-content {
         padding: calc((100vh - 830px)/2) 10%;
-    }
-
-    .footer-row div p {
-        font-size: 10px;
-    }
-
-    .fab {
-        font-size: 0.7em;
     }
 }
 
@@ -171,10 +143,10 @@ footer p {
     }
 
     .footer-row div p {
-        font-size: 9px;
+        font-size: 13px;
     }
 
     .fab {
-        font-size: 0.6em;
+        font-size: 0.9em;
     }
 }
