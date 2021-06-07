@@ -185,6 +185,7 @@ See the [open issues](https://github.com/lavadax/MS2-Monkey-Brain/issues) for a 
 
 ### Past issues
 
+Initial plan was to use a canvas as a game area, however it quickly became clear that hooking event listeners to auto-generated objects would require a lot of effort, so I changed my focus to SVG instead.
 
 <!-- TESTING TODO-->
 ## Testing
@@ -235,3 +236,5 @@ Project Link: [https://github.com/lavadax/MS2-Monkey-Brain](https://github.com/l
 * [https://github.com/othneildrew](https://github.com/othneildrew/Best-README-Template): for providing the readme template.
 * [https://github.com/Code-Institute-Solutions](https://github.com/Code-Institute-Solutions/SampleREADME): for filling in gaps in the readme template.
 * [https://github/com/lavadax](https://github.com/lavadax/MS1-Sheets-Dojo): overall styling from first milestone project used as a template for current project.
+* [https://w3schools.com](https://www.w3schools.com/html/html5_svg.asp): for instructions on how to use an SVG and draw on it.
+* [https://riptutorial.com](https://riptutorial.com/svg/example/17729/creating-an-element): For showcasing SVG a bit more, and to fill in gaps of my knowledge after going through w3schools.
