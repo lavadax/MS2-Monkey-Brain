@@ -18,7 +18,7 @@ function addNumber() { /* Add relevant number to the circle elements based on th
 
 function drawCircles() { /* Draw circle elements inside SVG */ 
                         /* Code is a slightly modified version of code found on riptutorials.com (link in readme) */
-    coordList.foreEach(function(coords) {
+    coordList.forEach(function(coords) {
         let coordPair = coords.split("/"); /* Take current coord pair, number before / is first in array, number after / is second in array */
         let circle = document.createElementNS(svgNS, "circle"); 
         circle.setAttribute("fill", "white");
