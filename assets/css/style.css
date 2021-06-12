@@ -44,7 +44,7 @@ header {
 .main-content {
     margin-top: 100px;
     min-height: calc(100vh - 185px); /* 185px = sum of header and footer height */
-    padding: calc((100vh - 700px)/2) 10%;
+    padding: calc((100vh - 600px)/2) 10%;
 }
 
 /* game area */
