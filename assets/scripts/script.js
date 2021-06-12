@@ -12,6 +12,10 @@ function testCircle() { /* TODO: Delete when done /// As the name suggests: this
     document.getElementsByTagName("svg")[0].appendChild(circle);
 }
 
+function addNumber() { /* Add relevant number to the circle elements based on the coords in the array and their index*/
+
+}
+
 function drawCircles() { /* Draw circle elements inside SVG*/ 
 
 }
@@ -44,6 +48,3 @@ function createCoords() { /* Generate coords to determine center point of circle
     }
 }
 
-function addNumber() { /* Add relevant number to the circle elements based on the coords in the array and their index*/
-
-}
