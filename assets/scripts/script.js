@@ -17,16 +17,16 @@ function drawCircles() { /* Draw circle elements inside SVG*/
 }
 
 function addToArray() { /* Add coords to array after checking for collision */
-
+    coordList.push(xCoord.toString() + "/" + yCoord.toString());
 }
 
 function collisionCheck() { /* Check for collision between new coords and existing coords in array */
-    let col = FALSE; /* initialize as FALSE to show no collision by default (needed for first coords) */
+    let col = false; /* initialize as FALSE to show no collision by default (needed for first coords) */
     coordList.forEach(function(coords) {
         let oldCoords = coords.split("/"); /* refresher on split function taken through w3schools.com */
         if (xCoord >= (oldCoords[0] - 45) && xCoord <= (oldCoords[0] + 45) && yCoord >= (oldCoords[1] - 45) && yCoord <= (oldCoords[1] + 45)) { 
             /* This if was made by tweaking the temporary check that can be found in my js psuedo file */
-            col = TRUE;
+            col = true;
         }
     })
     return col;
