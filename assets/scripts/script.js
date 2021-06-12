@@ -3,14 +3,6 @@ const svgNS = "http://www.w3.org/2000/svg"
 let xCoord;
 let yCoord;
 let coordList; /* array will contain previously used coords formatted as a string with / between X and Y coords eg: ["28/74","134/42"] */
-function testCircle() { /* TODO: Delete when done /// As the name suggests: this is a test function that will stay as a reference until I flesh out the actual function (less alt-tabbing) */
-    let circle = document.createElementNS(svgNS, "circle");
-    circle.setAttribute("fill", "white");
-    circle.setAttribute("cx", 40);
-    circle.setAttribute("cy", 40);
-    circle.setAttribute("r", 20);
-    document.getElementsByTagName("svg")[0].appendChild(circle);
-}
 
 function addNumber() { /* Add relevant number to the circle elements based on the coords in the array and their index. */
     coordList.forEach(function(coords, index) {
