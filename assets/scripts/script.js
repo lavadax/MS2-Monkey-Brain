@@ -13,7 +13,14 @@ function testCircle() { /* TODO: Delete when done /// As the name suggests: this
 }
 
 function addNumber() { /* Add relevant number to the circle elements based on the coords in the array and their index. */
-                        
+    coordList.forEach(function(coords, index) {
+        let coordPair = coords.split("/"); /* Take current coord pair, number before / is first in array, number after / is second in array */
+        let num = document.createElementNS(svgNS, "text");
+        num.setAttribute("x", coordPair[0]);
+        num.setAttribute("y", coordPair[1]);
+        num.innerHTML = index + 1;
+        $("#game-area").append(num);
+    }
 }
 
 function drawCircles() { /* Draw circle elements inside SVG */ 
