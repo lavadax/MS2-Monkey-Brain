@@ -16,7 +16,7 @@ function addNumber() { /* Add relevant number to the circle elements based on th
         num.setAttribute("y", coordPair[1]);
         num.innerHTML = index + 1;
         $("#game-area").append(num);
-    }
+    })
 }
 
 function drawCircles() { /* Draw circle elements inside SVG */ 
