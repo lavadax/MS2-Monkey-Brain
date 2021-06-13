@@ -55,7 +55,11 @@ function createCoords() { /* Generate coords to determine center point of circle
     yCoord = Math.floor(Math.random() * (height - 40) + 20);
 }
 
-function gameSetup(circles) { /* main function that calls other functions in order */
+function startGame() { /* main function that calls other functions in order when player is ready to attempt a solve */
+
+}
+
+function gameSetup(circles) { /* main function that calls other functions in order when setting up the game */
     width = $("#game-area").width();
     height = $("#game-area").height();
     for (counter = 1; counter <= circles; counter++) {
@@ -68,6 +72,9 @@ function gameSetup(circles) { /* main function that calls other functions in ord
     }
     drawCircles();
     addNumber();
+    $("circle")[0].click(function() { /* Add click listener to circle with number 1 to start the game */
+        gameStart();
+    })
     gameRunning = true;
 }
 
