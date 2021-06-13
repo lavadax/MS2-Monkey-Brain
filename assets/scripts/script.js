@@ -40,9 +40,10 @@ function collisionCheck() { /* Check for collision between new coords and existi
     let col = false; /* initialize as FALSE to show no collision by default (needed for first coords) */
     coordList.forEach(function(coords) {
         let oldCoords = coords.split("/"); /* refresher on split function taken through w3schools.com */
-        if (xCoord >= (oldCoords[0] - 45) && xCoord <= (oldCoords[0] + 45) && yCoord >= (oldCoords[1] - 45) && yCoord <= (oldCoords[1] + 45)) { 
+        if ((xCoord >= (parseInt(oldCoords[0]) - 45)) && (xCoord <= (parseInt(oldCoords[0]) + 45)) && (yCoord >= (parseInt(oldCoords[1]) - 45)) && (yCoord <= (parseInt(oldCoords[1]) + 45))) { 
             /* This if was made by tweaking the temporary check that can be found in my js psuedo file */
             col = true;
+            return col;
         }
     })
     return col;
