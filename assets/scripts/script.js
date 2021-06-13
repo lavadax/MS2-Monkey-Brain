@@ -10,6 +10,10 @@ let width; /* initializing vh and vw variables to expand scope */
 let height;
 let gameRunning = false;
 
+/* variables needed for gameStart() */
+
+let currentCircle;
+
 /* functions needed for gameSetup */
 
 function addNumber() { /* Add relevant number to the circle elements based on the coords in the array and their index. */
@@ -58,8 +62,19 @@ function createCoords() { /* Generate coords to determine center point of circle
     yCoord = Math.floor(Math.random() * (height - 40) + 20);
 }
 
-function gameStart() { /* main function that calls other functions in order when player is ready to attempt a solve */
+/* functions needed for gameStart() */
 
+function checkCircle(event) {
+    console.log($("circle").index(event.target)); /* testing for index comparison */
+    console.log(event.target); /* debugging */
+}
+
+function gameStart() { /* main function that calls other functions in order when player is ready to attempt a solve */
+    currentCircle = 1
+    $("text").not(":first()").hide(); /* Hide all numbers except the first */
+    $("circle").not(":first()").click(function(event) { /* add event listeners to all circles except the first after the first has been clicked */
+        checkCircle(event);
+    })
 }
 
 function gameSetup(circles) { /* main function that calls other functions in order when setting up the game */
