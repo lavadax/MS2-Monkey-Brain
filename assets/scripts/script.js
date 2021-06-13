@@ -2,7 +2,7 @@ const svgNS = "http://www.w3.org/2000/svg"
 
 let xCoord;
 let yCoord;
-let coordList; /* array will contain previously used coords formatted as a string with / between X and Y coords eg: ["28/74","134/42"] */
+let coordList = []; /* array will contain previously used coords formatted as a string with / between X and Y coords eg: ["28/74","134/42"] */
 let circles = 6; /* determines how many circles will be drawn. set to 6 for now, will be automated later */
 let counter; /* counter used for keeping track of how many circles have been drawn. initializing here to expand scope */
 let width; /* initializing vh and vw variables to expand scope */
@@ -67,3 +67,7 @@ function gameSetup(circles) { /* main function that calls other functions in ord
         addNumber();
     }
 }
+
+$("#start-game").click(function() {
+    gameSetup(circles);
+})
