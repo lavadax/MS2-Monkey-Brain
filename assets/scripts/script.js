@@ -1,5 +1,6 @@
-const svgNS = "http://www.w3.org/2000/svg"
+/* variables needed for gameSetup() */
 
+const svgNS = "http://www.w3.org/2000/svg"
 let xCoord;
 let yCoord;
 let coordList = []; /* array will contain previously used coords formatted as a string with / between X and Y coords eg: ["28/74","134/42"] */
@@ -8,6 +9,8 @@ let counter; /* counter used for keeping track of how many circles have been dra
 let width; /* initializing vh and vw variables to expand scope */
 let height;
 let gameRunning = false;
+
+/* functions needed for gameSetup */
 
 function addNumber() { /* Add relevant number to the circle elements based on the coords in the array and their index. */
     coordList.forEach(function(coords, index) {
