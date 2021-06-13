@@ -75,6 +75,9 @@ function gameSetup(circles) { /* main function that calls other functions in ord
     $("circle").first().click(function() { /* Add click listener to circle with number 1 to start the game */
         gameStart();
     })
+    $("text").first().click(function() { /* Add click listener to number 1 to start the game, this will cover the entire circle, instead of the circle excluding the number */
+        gameStart();
+    })
     gameRunning = true;
 }
 
