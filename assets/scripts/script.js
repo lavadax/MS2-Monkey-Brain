@@ -72,7 +72,7 @@ function gameSetup(circles) { /* main function that calls other functions in ord
     }
     drawCircles();
     addNumber();
-    $("circle")[0].click(function() { /* Add click listener to circle with number 1 to start the game */
+    $("circle").first().click(function() { /* Add click listener to circle with number 1 to start the game */
         gameStart();
     })
     gameRunning = true;
