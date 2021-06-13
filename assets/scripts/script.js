@@ -12,8 +12,8 @@ function addNumber() { /* Add relevant number to the circle elements based on th
     coordList.forEach(function(coords, index) {
         let coordPair = coords.split("/"); /* Take current coord pair, number before / is first in array, number after / is second in array */
         let num = document.createElementNS(svgNS, "text");
-        num.setAttribute("x", coordPair[0]);
-        num.setAttribute("y", coordPair[1]);
+        num.setAttribute("x", parseInt(coordPair[0])-5);
+        num.setAttribute("y", parseInt(coordPair[1])+5);
         num.innerHTML = index + 1;
         $("#game-area").append(num);
     })
