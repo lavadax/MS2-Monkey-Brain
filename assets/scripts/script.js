@@ -7,6 +7,7 @@ let circles = 6; /* determines how many circles will be drawn. set to 6 for now,
 let counter; /* counter used for keeping track of how many circles have been drawn. initializing here to expand scope */
 let width; /* initializing vh and vw variables to expand scope */
 let height;
+let gameRunning = false;
 
 function addNumber() { /* Add relevant number to the circle elements based on the coords in the array and their index. */
     coordList.forEach(function(coords, index) {
@@ -67,8 +68,13 @@ function gameSetup(circles) { /* main function that calls other functions in ord
     }
     drawCircles();
     addNumber();
+    gameRunning = true;
 }
 
 $("#start-game").click(function() {
-    gameSetup(circles);
+    if(!gameRunning) {
+        gameSetup(circles);
+    } else {
+        alert("A game has already been started, please finish the game before starting a new one.");
+    }
 })
