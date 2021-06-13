@@ -58,7 +58,7 @@ function createCoords() { /* Generate coords to determine center point of circle
     yCoord = Math.floor(Math.random() * (height - 40) + 20);
 }
 
-function startGame() { /* main function that calls other functions in order when player is ready to attempt a solve */
+function gameStart() { /* main function that calls other functions in order when player is ready to attempt a solve */
 
 }
 
