@@ -62,10 +62,10 @@ function gameSetup(circles) { /* main function that calls other functions in ord
             --counter;
         } else {
             addToArray();
-        }
-        drawCircles();
-        addNumber();
+        }   
     }
+    drawCircles();
+    addNumber();
 }
 
 $("#start-game").click(function() {
