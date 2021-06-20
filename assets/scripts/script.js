@@ -64,12 +64,20 @@ function createCoords() { /* Generate coords to determine center point of circle
 
 /* functions needed for gameStart() */
 
+function incrementCircle() {
+    $("text").eq(currentCircle).show();
+        currentCircle++;
+}
+
 function checkCircle(event) {
-    console.log($("circle").index(event.target)); /* testing for index comparison */
-    console.log(event.target); /* debugging */
+    if ($("circle").index(event.target) == currentCircle) {
+        incrementCircle();
+    }
 }
 
 function gameStart() { /* main function that calls other functions in order when player is ready to attempt a solve */
+    $("circle").first().unbind();
+    $("text").first().unbind();
     currentCircle = 1
     $("text").not(":first()").hide(); /* Hide all numbers except the first */
     $("circle").not(":first()").click(function(event) { /* add event listeners to all circles except the first after the first has been clicked */
