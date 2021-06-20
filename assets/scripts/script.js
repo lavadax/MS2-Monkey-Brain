@@ -64,14 +64,32 @@ function createCoords() { /* Generate coords to determine center point of circle
 
 /* functions needed for gameStart() */
 
+function finishLevel() {
+    alert("Congrats, you did it!");
+    gameStop();
+}
+
+function gameStop() {
+    $("circle").remove();
+    $("text").remove();
+    gameRunning = false;
+    coordList = [];
+}
+
 function incrementCircle() {
-    $("text").eq(currentCircle).show();
-        currentCircle++;
+    $("text").eq(currentCircle).show(); 
+    currentCircle++;
 }
 
 function checkCircle(event) {
     if ($("circle").index(event.target) == currentCircle) {
         incrementCircle();
+        if (currentCircle === circles) { /* TODO delay this check so line 80 has time to run */
+            finishLevel();
+        }
+    } else {
+        alert("Oops, you missed it!");
+        gameStop();
     }
 }
 
