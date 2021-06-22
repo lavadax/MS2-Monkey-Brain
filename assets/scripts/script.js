@@ -84,8 +84,8 @@ function incrementCircle() {
 function checkCircle(event) {
     if ($("circle").index(event.target) == currentCircle) {
         incrementCircle();
-        if (currentCircle === circles) { /* TODO delay this check so line 80 has time to run */
-            finishLevel();
+        if (currentCircle === circles) { 
+            setTimeout(finishLevel,0); /* without setTimeout, the number in the last circle will not become visible on click, unsure why */
         }
     } else {
         alert("Oops, you missed it!");
