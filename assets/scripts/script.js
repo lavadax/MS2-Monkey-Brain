@@ -1,5 +1,6 @@
-const svgNS = "http://www.w3.org/2000/svg"
+/* variables needed for gameSetup() */
 
+const svgNS = "http://www.w3.org/2000/svg"
 let xCoord;
 let yCoord;
 let coordList = []; /* array will contain previously used coords formatted as a string with / between X and Y coords eg: ["28/74","134/42"] */
@@ -8,6 +9,12 @@ let counter; /* counter used for keeping track of how many circles have been dra
 let width; /* initializing vh and vw variables to expand scope */
 let height;
 let gameRunning = false;
+
+/* variables needed for gameStart() */
+
+let currentCircle;
+
+/* functions needed for gameSetup */
 
 function addNumber() { /* Add relevant number to the circle elements based on the coords in the array and their index. */
     coordList.forEach(function(coords, index) {
@@ -55,8 +62,45 @@ function createCoords() { /* Generate coords to determine center point of circle
     yCoord = Math.floor(Math.random() * (height - 40) + 20);
 }
 
-function startGame() { /* main function that calls other functions in order when player is ready to attempt a solve */
+/* functions needed for gameStart() */
 
+function finishLevel() {
+    alert("Congrats, you did it!");
+    gameStop();
+}
+
+function gameStop() {
+    $("circle").remove();
+    $("text").remove();
+    gameRunning = false;
+    coordList = [];
+}
+
+function incrementCircle() {
+    $("text").eq(currentCircle).show(); 
+    currentCircle++;
+}
+
+function checkCircle(event) {
+    if ($("circle").index(event.target) == currentCircle) {
+        incrementCircle();
+        if (currentCircle === circles) { 
+            setTimeout(finishLevel,0); /* without setTimeout, the number in the last circle will not become visible on click, unsure why */
+        }
+    } else {
+        alert("Oops, you missed it!");
+        gameStop();
+    }
+}
+
+function gameStart() { /* main function that calls other functions in order when player is ready to attempt a solve */
+    $("circle").first().unbind();
+    $("text").first().unbind();
+    currentCircle = 1
+    $("text").not(":first()").hide(); /* Hide all numbers except the first */
+    $("circle").not(":first()").click(function(event) { /* add event listeners to all circles except the first after the first has been clicked */
+        checkCircle(event);
+    })
 }
 
 function gameSetup(circles) { /* main function that calls other functions in order when setting up the game */
