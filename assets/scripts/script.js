@@ -13,6 +13,7 @@ let gameRunning = false;
 /* variables needed for gameStart() */
 
 let currentCircle;
+let record = 0;
 
 /* functions needed for gameSetup */
 
@@ -22,6 +23,7 @@ function addNumber() { /* Add relevant number to the circle elements based on th
         let num = document.createElementNS(svgNS, "text");
         num.setAttribute("x", parseInt(coordPair[0])-5);
         num.setAttribute("y", parseInt(coordPair[1])+5);
+        num.setAttribute("style", "font-weight: bold")
         num.innerHTML = index + 1;
         $("#game-area").append(num);
     })
@@ -86,8 +88,17 @@ function gameSetup(circles) { /* main function that calls other functions in ord
 
 /* functions needed for gameStart() */
 
+function checkRecord() {
+    if(circles > record) {
+        record = circles;
+        $("#record").html(record);
+    }
+}
+
 function finishLevel() {
     alert("Congrats, you did it!");
+    checkRecord();
+    circles++;
     gameStop();
 }
 
@@ -111,6 +122,7 @@ function checkCircle(event) {
         }
     } else {
         alert("Oops, you missed it!");
+        circles = 6
         gameStop();
     }
 }
