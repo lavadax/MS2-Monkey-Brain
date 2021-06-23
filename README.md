@@ -173,8 +173,8 @@ x.0.0 Edits are reserved for major milestones explained below.
 0.2.0: Basic usage: Basic HTML and CSS are up and running on PC screens without major issues.  
 0.3.0: Basic responsiveness: Page is responsive for all screensizes without major issues.  
 1.0.0: Basic javascript: Basic javascript is up and running, completing minimum goals of the project.  
-2.0.0: More options: expansion on 1.0.0 by adding options on page themes.  
-3.0.0: Save state: Added usage of cookies and save export.  
+2.0.0: Save state: Added usage of cookies and save export.  
+3.0.0: More options: expansion on 1.0.0 by adding options on page themes.  
 
 ### Future Plans
 
