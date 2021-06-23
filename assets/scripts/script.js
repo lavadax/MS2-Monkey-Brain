@@ -62,6 +62,28 @@ function createCoords() { /* Generate coords to determine center point of circle
     yCoord = Math.floor(Math.random() * (height - 40) + 20);
 }
 
+function gameSetup(circles) { /* main function that calls other functions in order when setting up the game */
+    width = $("#game-area").width();
+    height = $("#game-area").height();
+    for (counter = 1; counter <= circles; counter++) {
+        createCoords();
+        if (collisionCheck()) {
+            --counter;
+        } else {
+            addToArray();
+        }   
+    }
+    drawCircles();
+    addNumber();
+    $("circle").first().click(function() { /* Add click listener to circle with number 1 to start the game */
+        gameStart();
+    })
+    $("text").first().click(function() { /* Add click listener to number 1 to start the game, this will cover the entire circle, instead of the circle excluding the number */
+        gameStart();
+    })
+    gameRunning = true;
+}
+
 /* functions needed for gameStart() */
 
 function finishLevel() {
@@ -101,28 +123,6 @@ function gameStart() { /* main function that calls other functions in order when
     $("circle").not(":first()").click(function(event) { /* add event listeners to all circles except the first after the first has been clicked */
         checkCircle(event);
     })
-}
-
-function gameSetup(circles) { /* main function that calls other functions in order when setting up the game */
-    width = $("#game-area").width();
-    height = $("#game-area").height();
-    for (counter = 1; counter <= circles; counter++) {
-        createCoords();
-        if (collisionCheck()) {
-            --counter;
-        } else {
-            addToArray();
-        }   
-    }
-    drawCircles();
-    addNumber();
-    $("circle").first().click(function() { /* Add click listener to circle with number 1 to start the game */
-        gameStart();
-    })
-    $("text").first().click(function() { /* Add click listener to number 1 to start the game, this will cover the entire circle, instead of the circle excluding the number */
-        gameStart();
-    })
-    gameRunning = true;
 }
 
 $("#start-game").click(function() {
