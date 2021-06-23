@@ -44,20 +44,53 @@ header {
 .main-content {
     margin-top: 100px;
     min-height: calc(100vh - 185px); /* 185px = sum of header and footer height */
-    padding: calc((100vh - 600px)/2) 10%;
+    padding: calc((100vh - 800px)/2) 0;
 }
 
 /* game area */
 
+#button-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+#start-game {
+    height: 30px;
+    width: 75px;
+    margin: 38px 0;
+    background-color: lightseagreen;
+    font-weight: bold;
+    border: 3px solid black;
+    border-radius: 5px;
+}
+
+#history {
+    height: 65px;
+    width: 75px;
+    margin: 20px 0;
+    background-color: slategray;
+    font-weight: bold;
+    border: 3px solid black;
+    border-radius: 5px;
+}
+
 #game-area {
     display: block;
     margin: auto;
+    padding: 0;
     width: 100%;
     height: 400px; /* TODO static size used for testing, will have to be made more responsive down the line */
-    max-width: 800px;
-    max-height: 400px;
+    max-width: 806px;
+    max-height: 406px;
     border: 3px solid black;
     background-color: slategray;
+}
+
+#score-text {
+    margin-top: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
 }
 
 /* footer */
