@@ -27,7 +27,6 @@ function addNumber() { /* Add relevant number to the circle elements based on th
             num.setAttribute("x", parseInt(coordPair[0])-9); /* Adjust x coordinate to take double digits into consideration */
         }
         num.setAttribute("y", parseInt(coordPair[1])+5);
-        num.setAttribute("style", "font-weight: bold")
         num.innerHTML = index + 1;
         $("#game-area").append(num);
     })
@@ -81,10 +80,10 @@ function gameSetup(circles) { /* main function that calls other functions in ord
     }
     drawCircles();
     addNumber();
-    $("circle").first().click(function() { /* Add click listener to circle with number 1 to start the game */
+    $("circle").first().css("cursor","pointer").click(function() { /* Add click listener to circle with number 1 to start the game */
         gameStart();
     })
-    $("text").first().click(function() { /* Add click listener to number 1 to start the game, this will cover the entire circle, instead of the circle excluding the number */
+    $("text").css("font-weight","bold").first().css("cursor","pointer").click(function() { /* Add click listener to number 1 to start the game, this will cover the entire circle, instead of the circle excluding the number */
         gameStart();
     })
     gameRunning = true;
@@ -136,7 +135,7 @@ function gameStart() { /* main function that calls other functions in order when
     $("text").first().unbind();
     currentCircle = 1
     $("text").not(":first()").hide(); /* Hide all numbers except the first */
-    $("circle").not(":first()").click(function(event) { /* add event listeners to all circles except the first after the first has been clicked */
+    $("circle").not(":first()").css("cursor","pointer").click(function(event) { /* add event listeners to all circles except the first after the first has been clicked */
         checkCircle(event);
     })
 }
