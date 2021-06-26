@@ -122,7 +122,7 @@ function checkCircle(event) {
     if ($("circle").index(event.target) == currentCircle) {
         incrementCircle();
         if (currentCircle === circles) { 
-            setTimeout(finishLevel,5); /* without setTimeout, the number in the last circle will not become visible on click in most cases */
+            setTimeout(finishLevel,20); /* without setTimeout, the number in the last circle will not become visible on click in most cases */
         }
     } else {
         alert("Oops, you missed it!");
