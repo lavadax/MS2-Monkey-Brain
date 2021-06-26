@@ -13,6 +13,7 @@ let gameRunning = false;
 /* variables needed for gameStart() */
 
 let currentCircle;
+let record = 0;
 
 /* functions needed for gameSetup */
 
@@ -20,8 +21,13 @@ function addNumber() { /* Add relevant number to the circle elements based on th
     coordList.forEach(function(coords, index) {
         let coordPair = coords.split("/"); /* Take current coord pair, number before / is first in array, number after / is second in array */
         let num = document.createElementNS(svgNS, "text");
-        num.setAttribute("x", parseInt(coordPair[0])-5);
+        if(index+1 < 10) {
+            num.setAttribute("x", parseInt(coordPair[0])-5);
+        } else {
+            num.setAttribute("x", parseInt(coordPair[0])-9); /* Adjust x coordinate to take double digits into consideration */
+        }
         num.setAttribute("y", parseInt(coordPair[1])+5);
+        num.setAttribute("style", "font-weight: bold")
         num.innerHTML = index + 1;
         $("#game-area").append(num);
     })
@@ -86,8 +92,17 @@ function gameSetup(circles) { /* main function that calls other functions in ord
 
 /* functions needed for gameStart() */
 
+function checkRecord() {
+    if(circles > record) {
+        record = circles;
+        $("#record").html(record);
+    }
+}
+
 function finishLevel() {
     alert("Congrats, you did it!");
+    checkRecord();
+    circles++;
     gameStop();
 }
 
@@ -107,10 +122,11 @@ function checkCircle(event) {
     if ($("circle").index(event.target) == currentCircle) {
         incrementCircle();
         if (currentCircle === circles) { 
-            setTimeout(finishLevel,0); /* without setTimeout, the number in the last circle will not become visible on click, unsure why */
+            setTimeout(finishLevel,5); /* without setTimeout, the number in the last circle will not become visible on click in most cases */
         }
     } else {
         alert("Oops, you missed it!");
+        circles = 6
         gameStop();
     }
 }
