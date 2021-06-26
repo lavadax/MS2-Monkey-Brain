@@ -21,7 +21,11 @@ function addNumber() { /* Add relevant number to the circle elements based on th
     coordList.forEach(function(coords, index) {
         let coordPair = coords.split("/"); /* Take current coord pair, number before / is first in array, number after / is second in array */
         let num = document.createElementNS(svgNS, "text");
-        num.setAttribute("x", parseInt(coordPair[0])-5);
+        if(index+1 < 10) {
+            num.setAttribute("x", parseInt(coordPair[0])-5);
+        } else {
+            num.setAttribute("x", parseInt(coordPair[0])-9); /* Adjust x coordinate to take double digits into consideration */
+        }
         num.setAttribute("y", parseInt(coordPair[1])+5);
         num.setAttribute("style", "font-weight: bold")
         num.innerHTML = index + 1;
