@@ -15,7 +15,7 @@ let gameRunning = false;
 let currentCircle;
 let record = 0;
 
-/* variables needed for setupHistory() */
+/* variables needed for historySetup() */
 let dailyAttempts = 0; /* initializing variable for history tab */
 let dailyRecord = 0;
 let today = new Date();
@@ -159,3 +159,19 @@ $("#start-game").click(function() {
         alert("A game has already been started, please finish the game before starting a new one.");
     }
 })
+
+/* functions needed for historySetup() */
+
+function checkHistory() { /* check if localStorage has data for today */
+    if (localStorage.getItem(localDate)) {
+        let dailyData = JSON.parse(localStorage.getItem(localDate));
+        dailyAttempts = parseInt(dailyData[0]);
+        dailyRecord = parseInt(dailyData[1]);
+    }
+}
+
+function updateHistory() {
+localStorage.setItem(localDate, JSON.stringify(new Array(dailyAttempts,dailyRecord)));
+}
+
+window.addEventListener("beforeunload", updateHistory);
