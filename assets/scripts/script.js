@@ -15,6 +15,12 @@ let gameRunning = false;
 let currentCircle;
 let record = 0;
 
+/* variables needed for setupHistory() */
+let dailyAttempts = 0; /* initializing variable for history tab */
+let dailyRecord = 0;
+let today = new Date();
+let localDate = JSON.stringify(today.getFullYear()+"/"+today.getMonth()+"/"+today.getDate());
+
 /* functions needed for gameSetup */
 
 function addNumber() { /* Add relevant number to the circle elements based on the coords in the array and their index. */
@@ -96,6 +102,9 @@ function checkRecord() {
         record = circles;
         $("#record").html(record);
     }
+    if(circles > dailyRecord) {
+        dailyRecord = circles;
+    }
 }
 
 function finishLevel() {
@@ -143,6 +152,9 @@ function gameStart() { /* main function that calls other functions in order when
 $("#start-game").click(function() {
     if(!gameRunning) {
         gameSetup(circles);
+        if(circles === 6) {
+            dailyAttempts++;;
+        }
     } else {
         alert("A game has already been started, please finish the game before starting a new one.");
     }
