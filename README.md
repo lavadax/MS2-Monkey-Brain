@@ -57,11 +57,13 @@
                 <li><a href="#future-plans">Future Plans</a></li>
                 <li><a href="#open-issues">Open Issues</a></li>
                 <li><a href="#past-issues">Past issues</a></li>
+                <li><a href="#site--methodology-changes">Site & Methodology Changes</a></li>
             </ul>
         </li>
         <li>
             <a href="#testing">Testing</a>
             <ul>
+                <li><a href="#validation">Validation</a></li>
                 <li><a href="#testing-user-stories">Testing User Stories</a></li>
                 <li><a href="#functional-testing">Functional Testing</a></li>
                 <li><a href="#accessibility-testing">Accessibility Testing</a></li>
@@ -183,12 +185,29 @@ x.0.0 Edits are reserved for major milestones explained below.
 
 See the [open issues](https://github.com/lavadax/MS2-Monkey-Brain/issues) for a list of proposed features (and known issues).
 
-### Past issues
+### Past Issues
+
+See the [closed issues](https://github.com/lavadax/MS2-Monkey-Brain/issues?q=is%3Aissue+is%3Aclosed) for a list of the closed issues.
+
+Other past issues to note:  
+* When testing the collision detection script initially, it would infinitely loop around 20-25% of the time due to incorrect variable manipulation turning integers into strings while checking overlap.
+
+### Site & Methodology Changes
+
+As I'm still learning about Github while working on these projects, the features I started using more recently are [projects](https://github.com/lavadax/MS2-Monkey-Brain/projects/1) and [releases](https://github.com/lavadax/MS2-Monkey-Brain/releases).
+
+During the initial planning phase, I had the idea of using cookies to keep track of past activity/records, and preferred theme, but my mentor suggested using localStorage instead.  
+As I had no backend information on either option, I went with the suggestion and started planning for it while working on the html & javascript.  
+At some point I got concerned about storage limitation so I ran some tests, and here are the results:
+![localStorage commands](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/localStorage.png)  
+Based on the results, I can reasonably assume that if someone plays 1000 times, every single day, I can store upwards of 722 days of data.  
 
 Initial plan was to use a canvas as a game area, however it quickly became clear that hooking event listeners to auto-generated objects would require a lot of effort, so I changed my focus to SVG instead.
 
 <!-- TESTING TODO-->
 ## Testing
+
+### Validation
 
 ### Testing User Stories
 
@@ -237,4 +256,5 @@ Project Link: [https://github.com/lavadax/MS2-Monkey-Brain](https://github.com/l
 * [https://github.com/Code-Institute-Solutions](https://github.com/Code-Institute-Solutions/SampleREADME): for filling in gaps in the readme template.
 * [https://github/com/lavadax](https://github.com/lavadax/MS1-Sheets-Dojo): overall styling from first milestone project used as a template for current project.
 * [https://w3schools.com](https://www.w3schools.com/html/html5_svg.asp): for instructions on how to use an SVG and draw on it.
-* [https://riptutorial.com](https://riptutorial.com/svg/example/17729/creating-an-element): For showcasing SVG a bit more, and to fill in gaps of my knowledge after going through w3schools.
+* [https://riptutorial.com](https://riptutorial.com/svg/example/17729/creating-an-element): For showcasing SVG a bit more, and to fill in gaps of my knowledge after going through w3schools.  
+* [https://stackoverflow.com/](https://stackoverflow.com/questions/2989284/what-is-the-max-size-of-localstorage-values): For space limitations on localStorage.
