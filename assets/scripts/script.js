@@ -174,4 +174,11 @@ function updateHistory() {
 localStorage.setItem(localDate, JSON.stringify(new Array(dailyAttempts,dailyRecord)));
 }
 
+$(".periodic .dropdown-menu .dropdown-item").click(function() {
+    $(".periodic button").html($(this).html());
+    $(".periodic .dropdown-menu .dropdown-item").removeClass("active");
+    $(this).addClass("active");
+    /* TODO add function to setup graph based on periodicity in dropdown (look into chartjs) */
+})
+
 window.addEventListener("beforeunload", updateHistory);
