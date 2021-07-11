@@ -92,6 +92,7 @@ function finishLevel() {
     checkRecord();
     circles++;
     gameStop();
+    checkRunning();
 }
 
 function gameStop() {
@@ -227,6 +228,17 @@ function initHistory() {
 
 /* function callers */
 
+function checkRunning() {
+    if(!gameRunning) {
+        gameSetup(circles);
+        if(circles === 6) {
+            dailyAttempts++;;
+        }
+    } else {
+        alert("A game has already been started, please finish the game before starting a new one.");
+    }
+}
+
 function gameSetup(circles) { /* main function that calls other functions in order when setting up the game */
     width = $("#game-area").width();
     height = $("#game-area").height();
@@ -256,14 +268,7 @@ function gameStart() { /* main function that calls other functions in order when
 
 function startClick() {
     $("#start-game").click(function() { /* start game event listener */
-        if(!gameRunning) {
-            gameSetup(circles);
-            if(circles === 6) {
-                dailyAttempts++;;
-            }
-        } else {
-            alert("A game has already been started, please finish the game before starting a new one.");
-        }
+        checkRunning();
     })
 }
 
