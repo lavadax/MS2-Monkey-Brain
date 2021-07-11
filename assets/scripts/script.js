@@ -19,8 +19,12 @@ let record = 0;
 let dailyAttempts = 0; /* initializing variable for history tab */
 let dailyRecord = 0;
 let today = new Date();
-let localDate = JSON.stringify(today.toISOString().slice(0,10));
-let currentHistory = [];
+let localDate = today.toISOString().slice(0,10);
+let history = [];
+let limit = 7;
+let labels;
+let attempts;
+let records;
 
 /* functions needed for gameSetup */
 
@@ -120,12 +124,71 @@ function checkCircle(event) {
     }
 }
 
+/* functions needed for historySetup() */
+
+function getLimit() {
+    if (history.length < 7) {
+        limit = history.length;
+    }
+}
+
+function getData(index) {
+    let tempArray = [];
+    let arrayLength = history.length-1;
+    for (let i = arrayLength; arrayLength-i < limit; i--) {
+        tempArray.unshift(history[i][index]);
+    }
+    return tempArray;
+}
+
+function setupChart() { /* testing chart function with assumption of max 7 entries */
+    let configData = {
+        type: "scatter",
+        data: {
+            labels: labels,
+            datasets: [{
+                type: "line",
+                label: "Record",
+                data: records,
+                borderColor: "rgb(175,12,12)"
+            }, {
+                type: "bar",
+                label: "Attempts",
+                data: attempts,
+                backgroundColor: "rgba(12,12,125,0.8)",
+                borderColor: "rgb(12,12,125)",
+                borderWidth: 3
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    }
+    let myChart = new Chart($("#chart-area"),configData);
+}
+
+function noGames() {
+    let c = $("#chart-area")[0];
+    let ctx = c.getContext("2d");
+    ctx.font = "24px Helvetica";
+    ctx.fillText("Please play a game first", 10, 50);
+}
 
 /* localstorage functions */
 
-function checkStorage() { /* check if localStorage has data for today */
+function getHistory() {
     if (localStorage.getItem("history")) {
-        let history = JSON.parse(localStorage.getItem("history"));
+        history = JSON.parse(localStorage.getItem("history"));
+    }
+}
+
+function checkStorage() { /* check if localStorage has data for today */
+    getHistory();
+    if (history) {
         for (let dailyData of history) {
             if (dailyData[0] === localDate) { /* if data for today exists, update daily vars based on previous data, otherwise keep as 0 */
                 dailyAttempts = parseInt(dailyData[1]);
@@ -146,14 +209,14 @@ function updateRecord() {
 }
 
 function updateHistory() {
-    if (localStorage.getItem("history")){
-        currentHistory = JSON.parse(localStorage.getItem("history"));
-        if (currentHistory[currentHistory.length-1][0] === localDate) {
-            currentHistory.pop();
+    getHistory();
+    if (history && history.length){
+        if (history[history.length-1][0] === localDate) {
+            history.pop();
         }
     }
-    currentHistory.push([localDate,dailyAttempts,dailyRecord]);
-    localStorage.setItem("history", JSON.stringify(currentHistory));
+    history.push([localDate,dailyAttempts,dailyRecord]);
+    localStorage.setItem("history", JSON.stringify(history));
 }
 
 function getLocalStorageStatus() { /* taken from dev.to/zigabrencic (full link in acknowledgements) */
@@ -186,7 +249,6 @@ function getLocalStorageStatus() { /* taken from dev.to/zigabrencic (full link i
     }   
     return true;
 }
-
 
 /* functions needed to swap pages */
 
@@ -264,6 +326,17 @@ function gameStart() { /* main function that calls other functions in order when
     startGameClick();
 }
 
+function historySetup() { /* TODO adjust chart & vars based on periodicity */
+    if (dailyAttempts) {
+        updateHistory();
+    }
+    getLimit();
+    labels = getData(0);
+    attempts = getData(1);
+    records = getData(2);
+    setupChart();
+}
+
 /* Event listeners */
 
 function startClick() {
@@ -275,6 +348,11 @@ function startClick() {
 function historyClick() {
     $("#history").click(function() {
         initHistory();
+        if (!dailyAttempts && !localStorage.getItem("history")) {
+            noGames();
+        } else {
+            historySetup();
+        }
     })
 }
 
@@ -310,7 +388,7 @@ function periodicClick() {
 
 function pageClose() { /* update history and record upon closing the page */
     window.addEventListener("beforeunload", function() {
-        if (localStorage){
+        if (getLocalStorageStatus() && dailyAttempts){ /* update localstorage when localstorage is available & at least 1 game was played today */
             updateHistory();
             updateRecord();
         }
@@ -324,4 +402,4 @@ $(document).ready(function() { /* call functions to initialize all needed variab
     checkStorage(); 
     initGame();
     pageClose();
-});
+})
