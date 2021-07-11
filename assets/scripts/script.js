@@ -124,10 +124,10 @@ function checkCircle(event) {
 /* localstorage functions */
 
 function checkStorage() { /* check if localStorage has data for today */
-    if (localStorage.getItem("history")) { /* TODO adjust check based on new localstorage format */
+    if (localStorage.getItem("history")) {
         let history = JSON.parse(localStorage.getItem("history"));
         for (let dailyData of history) {
-            if (dailyData[0] === localDate) {
+            if (dailyData[0] === localDate) { /* if data for today exists, update daily vars based on previous data, otherwise keep as 0 */
                 dailyAttempts = parseInt(dailyData[1]);
                 dailyRecord = parseInt(dailyData[2]);
                 break;
@@ -257,7 +257,7 @@ function gameSetup(circles) { /* main function that calls other functions in ord
 }
 
 function gameStart() { /* main function that calls other functions in order when player is ready to attempt a solve */
-    $("circle").first().unbind();
+    $("circle").first().unbind(); 
     $("text").first().unbind();
     currentCircle = 1
     $("text").not(":first()").hide(); /* Hide all numbers except the first */
