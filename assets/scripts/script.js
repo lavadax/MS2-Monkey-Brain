@@ -120,15 +120,23 @@ function checkCircle(event) {
 }
 
 
-/* functions needed for historySetup() */
+/* localstorage functions */
 
-function checkHistory() { /* check if localStorage has data for today */
-    if (localStorage.getItem(localDate)) { /* TODO adjust check based on new localstorage format */
-        let dailyData = JSON.parse(localStorage.getItem(localDate));
-        dailyAttempts = parseInt(dailyData[0]);
-        dailyRecord = parseInt(dailyData[1]);
+function checkStorage() { /* check if localStorage has data for today */
+    if (localStorage.getItem("history")) { /* TODO adjust check based on new localstorage format */
+        let history = JSON.parse(localStorage.getItem("history"));
+        for (let dailyData of history) {
+            if (dailyData[0] === localDate) {
+                dailyAttempts = parseInt(dailyData[1]);
+                dailyRecord = parseInt(dailyData[2]);
+                break;
+            }
+        }
     }
-}
+    if (localStorage.getItem("record")) {
+        record = localStorage.getItem("record");
+    }
+} /* TODO add theme check once implemented */
 
 function updateRecord() {
     if (!localStorage.getItem("record") || localStorage.getItem("record") < record) {
@@ -139,22 +147,45 @@ function updateRecord() {
 function updateHistory() {
     if (localStorage.getItem("history")){
         currentHistory = JSON.parse(localStorage.getItem("history"));
+        if (currentHistory[currentHistory.length-1][0] === localDate) {
+            currentHistory.pop();
+        }
     }
     currentHistory.push([localDate,dailyAttempts,dailyRecord]);
     localStorage.setItem("history", JSON.stringify(currentHistory));
 }
 
+function getLocalStorageStatus() { /* taken from dev.to/zigabrencic (full link in acknowledgements) */
+    try {
+        // try setting an item
+        localStorage.setItem("test", "test");
+        localStorage.removeItem("test");
+    }
+    catch(e)
+    {   
+        // browser specific checks if local storage was exceeded
+        if (e.name === "QUATA_EXCEEDED_ERR" // Chrome
+            || e.name === "NS_ERROR_DOM_QUATA_REACHED" //Firefox/Safari
+        ) {
+            // local storage is full
+            return false;
+        } else {
+            try{
+                if(localStorage.remainingSpace === 0) {// IE
+                    // local storage is full
+                    return false;
+                }
+            }catch (e) {
+                // localStorage.remainingSpace doesn't exist
+            }
 
-
-    /* checkHistory();
-    window.addEventListener("beforeunload", function() {
-        if (localStorage){
-            updateHistory();
-            updateRecord();
+            // local storage might not be available
+            return false;
         }
-    }); 
+    }   
+    return true;
+}
 
-        TODO uncomment when functions are set up */
 
 /* functions needed to swap pages */
 
@@ -272,6 +303,20 @@ function periodicClick() {
     })
 }
 
+function pageClose() { /* update history and record upon closing the page */
+    window.addEventListener("beforeunload", function() {
+        if (localStorage){
+            updateHistory();
+            updateRecord();
+        }
+    });
+}
+
 $(document).ready(function() { /* call functions to initialize all needed variables based on history, and update html */
-    initGame(); /* TODO check localstorage first so record is updated */
+    if (!getLocalStorageStatus()) {
+        alert("It appears your localStorage is unavailable, or full. This page uses localStorage to store previous records and a full play history but is not required to play.");
+    }
+    checkStorage(); 
+    initGame();
+    pageClose();
 });
