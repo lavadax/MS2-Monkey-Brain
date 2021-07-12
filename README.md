@@ -252,9 +252,10 @@ Project Link: [https://github.com/lavadax/MS2-Monkey-Brain](https://github.com/l
 <!-- ACKNOWLEDGEMENTS TODO-->
 ## Acknowledgements
 
-* [https://github.com/othneildrew](https://github.com/othneildrew/Best-README-Template): for providing the readme template.
-* [https://github.com/Code-Institute-Solutions](https://github.com/Code-Institute-Solutions/SampleREADME): for filling in gaps in the readme template.
-* [https://github/com/lavadax](https://github.com/lavadax/MS1-Sheets-Dojo): overall styling from first milestone project used as a template for current project.
-* [https://w3schools.com](https://www.w3schools.com/html/html5_svg.asp): for instructions on how to use an SVG and draw on it.
-* [https://riptutorial.com](https://riptutorial.com/svg/example/17729/creating-an-element): For showcasing SVG a bit more, and to fill in gaps of my knowledge after going through w3schools.  
-* [https://stackoverflow.com/](https://stackoverflow.com/questions/2989284/what-is-the-max-size-of-localstorage-values): For space limitations on localStorage.
+* [github.com/othneildrew](https://github.com/othneildrew/Best-README-Template): for providing the readme template.
+* [github.com/Code-Institute-Solutions](https://github.com/Code-Institute-Solutions/SampleREADME): for filling in gaps in the readme template.
+* [github.com/lavadax](https://github.com/lavadax/MS1-Sheets-Dojo): overall styling from first milestone project used as a template for current project.
+* [w3schools.com](https://www.w3schools.com/html/html5_svg.asp): for instructions on how to use an SVG and draw on it.
+* [riptutorial.com](https://riptutorial.com/svg/example/17729/creating-an-element): For showcasing SVG a bit more, and to fill in gaps of my knowledge after going through w3schools.  
+* [stackoverflow.com](https://stackoverflow.com/questions/2989284/what-is-the-max-size-of-localstorage-values): For space limitations on localStorage.  
+* [dev.to/zigabrencic](https://dev.to/zigabrencic/web-browser-local-storage-16jh): for the localStorage check.

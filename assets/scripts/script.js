@@ -19,7 +19,12 @@ let record = 0;
 let dailyAttempts = 0; /* initializing variable for history tab */
 let dailyRecord = 0;
 let today = new Date();
-let localDate = JSON.stringify(today.getFullYear()+"/"+today.getMonth()+"/"+today.getDate());
+let localDate = today.toISOString().slice(0,10);
+let history = [];
+let limit = 7;
+let labels;
+let attempts;
+let records;
 
 /* functions needed for gameSetup */
 
@@ -73,27 +78,6 @@ function createCoords() { /* Generate coords to determine center point of circle
     yCoord = Math.floor(Math.random() * (height - 40) + 20);
 }
 
-function gameSetup(circles) { /* main function that calls other functions in order when setting up the game */
-    width = $("#game-area").width();
-    height = $("#game-area").height();
-    for (counter = 1; counter <= circles; counter++) {
-        createCoords();
-        if (collisionCheck()) {
-            --counter;
-        } else {
-            addToArray();
-        }   
-    }
-    drawCircles();
-    addNumber();
-    $("circle").first().css("cursor","pointer").click(function() { /* Add click listener to circle with number 1 to start the game */
-        gameStart();
-    })
-    $("text").css("font-weight","bold").first().css("cursor","pointer").click(function() { /* Add click listener to number 1 to start the game, this will cover the entire circle, instead of the circle excluding the number */
-        gameStart();
-    })
-    gameRunning = true;
-}
 
 /* functions needed for gameStart() */
 
@@ -112,6 +96,7 @@ function finishLevel() {
     checkRecord();
     circles++;
     gameStop();
+    checkRunning();
 }
 
 function gameStop() {
@@ -139,17 +124,173 @@ function checkCircle(event) {
     }
 }
 
-function gameStart() { /* main function that calls other functions in order when player is ready to attempt a solve */
-    $("circle").first().unbind();
-    $("text").first().unbind();
-    currentCircle = 1
-    $("text").not(":first()").hide(); /* Hide all numbers except the first */
-    $("circle").not(":first()").css("cursor","pointer").click(function(event) { /* add event listeners to all circles except the first after the first has been clicked */
-        checkCircle(event);
-    })
+/* functions needed for historySetup() */
+
+function getLimit() {
+    if (history.length < 7) {
+        limit = history.length;
+    }
 }
 
-$("#start-game").click(function() {
+function getData(index) {
+    let tempArray = [];
+    let arrayLength = history.length-1;
+    for (let i = arrayLength; arrayLength-i < limit; i--) {
+        tempArray.unshift(history[i][index]);
+    }
+    return tempArray;
+}
+
+function setupChart() { /* testing chart function with assumption of max 7 entries */
+    let configData = {
+        type: "scatter",
+        data: {
+            labels: labels,
+            datasets: [{
+                type: "line",
+                label: "Record",
+                data: records,
+                borderColor: "rgb(175,12,12)"
+            }, {
+                type: "bar",
+                label: "Attempts",
+                data: attempts,
+                backgroundColor: "rgba(12,12,125,0.8)",
+                borderColor: "rgb(12,12,125)",
+                borderWidth: 3
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    }
+    let myChart = new Chart($("#chart-area"),configData);
+}
+
+function noGames() {
+    let c = $("#chart-area")[0];
+    let ctx = c.getContext("2d");
+    ctx.font = "24px Helvetica";
+    ctx.fillText("Please play a game first", 10, 50);
+}
+
+/* localstorage functions */
+
+function getHistory() {
+    if (localStorage.getItem("history")) {
+        history = JSON.parse(localStorage.getItem("history"));
+    }
+}
+
+function checkStorage() { /* check if localStorage has data for today */
+    getHistory();
+    if (history) {
+        for (let dailyData of history) {
+            if (dailyData[0] === localDate) { /* if data for today exists, update daily vars based on previous data, otherwise keep as 0 */
+                dailyAttempts = parseInt(dailyData[1]);
+                dailyRecord = parseInt(dailyData[2]);
+                break;
+            }
+        }
+    }
+    if (localStorage.getItem("record")) {
+        record = localStorage.getItem("record");
+    }
+} /* TODO add theme check once implemented */
+
+function updateRecord() {
+    if (!localStorage.getItem("record") || localStorage.getItem("record") < record) {
+        localStorage.setItem("record", record);
+    }
+}
+
+function updateHistory() {
+    getHistory();
+    if (history && history.length){
+        if (history[history.length-1][0] === localDate) {
+            history.pop();
+        }
+    }
+    history.push([localDate,dailyAttempts,dailyRecord]);
+    localStorage.setItem("history", JSON.stringify(history));
+}
+
+function getLocalStorageStatus() { /* taken from dev.to/zigabrencic (full link in acknowledgements) */
+    try {
+        // try setting an item
+        localStorage.setItem("test", "test");
+        localStorage.removeItem("test");
+    }
+    catch(e)
+    {   
+        // browser specific checks if local storage was exceeded
+        if (e.name === "QUATA_EXCEEDED_ERR" // Chrome
+            || e.name === "NS_ERROR_DOM_QUATA_REACHED" //Firefox/Safari
+        ) {
+            // local storage is full
+            return false;
+        } else {
+            try{
+                if(localStorage.remainingSpace === 0) {// IE
+                    // local storage is full
+                    return false;
+                }
+            }catch (e) {
+                // localStorage.remainingSpace doesn't exist
+            }
+
+            // local storage might not be available
+            return false;
+        }
+    }   
+    return true;
+}
+
+/* functions needed to swap pages */
+
+function initGame() {
+    $(".main-content").html(`
+        <div class="row" id="button-row">
+            <button id="start-game">Start</button>
+            <button id="history">History</button>
+        </div>
+        <svg id="game-area"></svg>
+        <p id="score-text">Highest achieved number: <span id="record">${record}</span></p>
+        `
+    );
+    historyClick();
+    startClick();
+}
+
+function initHistory() {
+    $(".main-content").html(`
+        <div class="row" id="button-row">
+            <div class="dropdown periodic">
+                <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Day
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li class="dropdown-item active" id="day">Day</li>
+                    <li class="dropdown-item" id="week">Week</li>
+                    <li class="dropdown-item" id="month">Month</li>
+                </div>
+            </div>
+            <button id="game">Game</button>
+        </div>
+        <canvas id="chart-area"></canvas>
+        `
+    );
+    gameClick();
+    periodicClick();
+}
+
+/* function callers */
+
+function checkRunning() {
     if(!gameRunning) {
         gameSetup(circles);
         if(circles === 6) {
@@ -158,20 +299,107 @@ $("#start-game").click(function() {
     } else {
         alert("A game has already been started, please finish the game before starting a new one.");
     }
-})
+}
 
-/* functions needed for historySetup() */
-
-function checkHistory() { /* check if localStorage has data for today */
-    if (localStorage.getItem(localDate)) {
-        let dailyData = JSON.parse(localStorage.getItem(localDate));
-        dailyAttempts = parseInt(dailyData[0]);
-        dailyRecord = parseInt(dailyData[1]);
+function gameSetup(circles) { /* main function that calls other functions in order when setting up the game */
+    width = $("#game-area").width();
+    height = $("#game-area").height();
+    for (counter = 1; counter <= circles; counter++) {
+        createCoords();
+        if (collisionCheck()) {
+            --counter;
+        } else {
+            addToArray();
+        }   
     }
+    drawCircles();
+    addNumber();
+    setupGameClick();
+    gameRunning = true;
 }
 
-function updateHistory() {
-localStorage.setItem(localDate, JSON.stringify(new Array(dailyAttempts,dailyRecord)));
+function gameStart() { /* main function that calls other functions in order when player is ready to attempt a solve */
+    $("circle").first().unbind(); 
+    $("text").first().unbind();
+    currentCircle = 1
+    $("text").not(":first()").hide(); /* Hide all numbers except the first */
+    startGameClick();
 }
 
-window.addEventListener("beforeunload", updateHistory);
+function historySetup() { /* TODO adjust chart & vars based on periodicity */
+    if (dailyAttempts) {
+        updateHistory();
+    }
+    getLimit();
+    labels = getData(0);
+    attempts = getData(1);
+    records = getData(2);
+    setupChart();
+}
+
+/* Event listeners */
+
+function startClick() {
+    $("#start-game").click(function() { /* start game event listener */
+        checkRunning();
+    })
+}
+
+function historyClick() {
+    $("#history").click(function() {
+        initHistory();
+        if (!dailyAttempts && !localStorage.getItem("history")) {
+            noGames();
+        } else {
+            historySetup();
+        }
+    })
+}
+
+function gameClick() {
+    $("#game").click(function() {
+        initGame();
+    })
+}
+
+function setupGameClick() { /* add event listener to 1st circle and number */
+    $("circle").first().css("cursor","pointer").click(function() { /* Add click listener to circle with number 1 to start the game */
+        gameStart();
+    })
+    $("text").css("font-weight","bold").first().css("cursor","pointer").click(function() { /* Add click listener to number 1 to start the game, this will cover the entire circle, instead of the circle excluding the number */
+        gameStart();
+    })
+}
+
+function startGameClick() {
+    $("circle").not(":first()").css("cursor","pointer").click(function(event) { /* add event listeners to all circles except the first after the first has been clicked */
+        checkCircle(event);
+    })
+}
+
+function periodicClick() {
+    $(".periodic .dropdown-menu .dropdown-item").click(function() {
+        $(".periodic button").html($(this).html());
+        $(".periodic .dropdown-menu .dropdown-item").removeClass("active");
+        $(this).addClass("active");
+        /* TODO add function to setup graph based on periodicity in dropdown (look into chartjs) */
+    })
+}
+
+function pageClose() { /* update history and record upon closing the page */
+    window.addEventListener("beforeunload", function() {
+        if (getLocalStorageStatus() && dailyAttempts){ /* update localstorage when localstorage is available & at least 1 game was played today */
+            updateHistory();
+            updateRecord();
+        }
+    });
+}
+
+$(document).ready(function() { /* call functions to initialize all needed variables based on history, and update html */
+    if (!getLocalStorageStatus()) {
+        alert("It appears your localStorage is unavailable, or full. This page uses localStorage to store previous records and a full play history but is not required to play.");
+    }
+    checkStorage(); 
+    initGame();
+    pageClose();
+})
