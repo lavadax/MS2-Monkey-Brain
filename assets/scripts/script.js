@@ -4,7 +4,7 @@ const svgNS = "http://www.w3.org/2000/svg"
 let xCoord;
 let yCoord;
 let coordList = []; /* array will contain previously used coords formatted as a string with / between X and Y coords eg: ["28/74","134/42"] */
-let circles = 6; /* determines how many circles will be drawn. set to 6 for now, will be automated later */
+let circles = 6; /* determines how many circles will be drawn. */
 let counter; /* counter used for keeping track of how many circles have been drawn. initializing here to expand scope */
 let width; /* initializing vh and vw variables to expand scope */
 let height;
@@ -288,6 +288,47 @@ function initHistory() {
     periodicClick();
 }
 
+/* introJS functions */
+
+function startIntro() { // TODO add check for gameRunning and ask for user confirmation as this will finish current game
+    introJs().setOptions({
+        steps: [{
+            title: "Welcome",
+            intro: "On this site you can test how good your memory is. I will quickly show you how to proceed"
+        }, { // TODO add help button to html and link here
+            intro: "If at any point you'd like to view this intro again, please click the help button"
+        }, {
+            element: document.querySelector("#start-game"),
+            intro: "You can start the game by clicking on the start button" // gameSetup is done after this
+        }, {
+            element: document.querySelector("#game-area"),
+            intro: "This will generate a number of circles in the game area, depending on the level you're on"
+        }, {
+            element: document.querySelector("#game-area"),
+            intro: "Take your time to memorize what position the circles are in, starting at number 1 and going up one by one"
+        }, {
+            element: document.querySelector("#game-area"),
+            intro: "Once you're ready to start, click on number 1 (We'll do this for you to continue the intro)" // gameStart is done after this
+        }, {
+            element: document.querySelector("#game-area"),
+            intro: "All the other numbers are now hidden, and you have to rely on your memory to click them in the correct order"
+        }]
+    }).onchange(function() {
+        switch(this._currentStep) {
+            case 3:
+                gameSetup(circles);
+                break;
+            case 6:
+                gameStart();
+                break;
+            default:
+                break;
+        }
+    }).onexit(function() {
+        gameStop();
+    }).start();
+}
+
 /* function callers */
 
 function checkRunning() {
@@ -402,4 +443,5 @@ $(document).ready(function() { /* call functions to initialize all needed variab
     checkStorage(); 
     initGame();
     pageClose();
+    startIntro();
 })
