@@ -295,7 +295,8 @@ function startIntro() { // TODO add check for gameRunning and ask for user confi
         steps: [{
             title: "Welcome",
             intro: "On this site you can test how good your memory is. I will quickly show you how to proceed"
-        }, { // TODO add help button to html and link here
+        }, { 
+            element: document.querySelector("#help-button"),
             intro: "If at any point you'd like to view this intro again, please click the help button"
         }, {
             element: document.querySelector("#start-game"),
@@ -380,6 +381,13 @@ function historySetup() { /* TODO adjust chart & vars based on periodicity */
 
 /* Event listeners */
 
+function helpClick() { /* help button event listener */
+    $("#help-button").click(function () {
+        initGame();
+        startIntro();
+    })
+}
+
 function startClick() {
     $("#start-game").click(function() { /* start game event listener */
         checkRunning();
@@ -440,8 +448,9 @@ $(document).ready(function() { /* call functions to initialize all needed variab
     if (!getLocalStorageStatus()) {
         alert("It appears your localStorage is unavailable, or full. This page uses localStorage to store previous records and a full play history but is not required to play.");
     }
-    checkStorage(); 
+    checkStorage();
     initGame();
     pageClose();
+    helpClick();
     startIntro();
 })
