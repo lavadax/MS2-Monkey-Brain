@@ -24,12 +24,14 @@ header {
     background-color: #000;
 }
 
+header .container, header .row {
+    height: inherit;
+    max-width: 100%;
+}
+
 /* logo */
 
 #logo-container {
-    position:absolute;
-    left: 10px;
-    top:0;
     padding:0;
     margin:0;
 }
@@ -37,6 +39,35 @@ header {
 #logo {
     height: 100px;
     width: 100px;
+}
+
+/* help button */
+
+#help-container {
+    padding:0;
+    margin:0;
+}
+
+#help-button {
+    float: right;
+    width: 80px;
+    height: 60px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #000;
+    border: 2px solid #FF2525;
+    margin-top: 20px;
+    padding: 15px 0;
+    border-radius: 7px;
+    transition: all 0.2s ease-in-out;
+    font-weight: bold;
+}
+
+#help-button:hover {
+    color: #000;
+    background-color: #fff;
+    border-color: #FF2525;
 }
 
 /* main body section */
@@ -55,45 +86,58 @@ header {
 }
 
 #start-game {
-    height: 30px;
+    height: 40px;
     width: 75px;
     margin: 38px 0;
-    background-color: lightseagreen;
+    color: #fff;
+    background-color: #000;
+    border: 2px solid #FF2525;
+    border-radius: 7px;
+    transition: all 0.2s ease-in-out;
     font-weight: bold;
-    border: 3px solid black;
-    border-radius: 5px;
 }
 
 .periodic button {
-    height: 30px;
+    height: 40px;
     width: 75px;
     margin: 38px 0;
     padding: 0;
-    color: black;
-    background-color: lightseagreen;
+    color: #fff;
+    background-color: #000;
+    border: 2px solid #FF2525;
+    border-radius: 7px;
+    transition: all 0.2s ease-in-out;
     font-weight: bold;
-    border: 3px solid black;
-    border-radius: 5px;
 }
 
 #history {
-    height: 65px;
+    height: 40px;
     width: 75px;
-    margin: 20px 0;
-    background-color: slategray;
+    margin: 38px 0;
+    color: #fff;
+    background-color: #000;
+    border: 2px solid #FF2525;
+    border-radius: 7px;
+    transition: all 0.2s ease-in-out;
     font-weight: bold;
-    border: 3px solid black;
-    border-radius: 5px;
 }
 
 #game {
-    height: 65px;
+    height: 40px;
     width: 75px;
-    margin: 20px 0;
-    background-color: slategray;
+    margin: 38px 0;
+    color: #fff;
+    background-color: #000;
+    border: 2px solid #FF2525;
+    border-radius: 7px;
+    transition: all 0.2s ease-in-out;
     font-weight: bold;
-    border: 3px solid black;
-    border-radius: 5px;
+}
+
+#start-game:hover, .periodic button:hover, #history:hover, #game:hover {
+    color: #000;
+    background-color: #fff;
+    border-color: #FF2525;
 }
 
 #game-area {
