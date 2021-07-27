@@ -188,6 +188,7 @@ function getHistory() {
 
 function checkStorage() { /* check if localStorage has data for today */
     getHistory();
+    /* TODO add theme check once implemented */
     if (history) {
         for (let dailyData of history) {
             if (dailyData[0] === localDate) { /* if data for today exists, update daily vars based on previous data, otherwise keep as 0 */
@@ -199,8 +200,11 @@ function checkStorage() { /* check if localStorage has data for today */
     }
     if (localStorage.getItem("record")) {
         record = localStorage.getItem("record");
+        return true; /* return value is used to check whether intro.js should autorun or not */
+    } else {
+        return false;
     }
-} /* TODO add theme check once implemented */
+} 
 
 function updateRecord() {
     if (!localStorage.getItem("record") || localStorage.getItem("record") < record) {
@@ -440,6 +444,7 @@ function pageClose() { /* update history and record upon closing the page */
         if (getLocalStorageStatus() && dailyAttempts){ /* update localstorage when localstorage is available & at least 1 game was played today */
             updateHistory();
             updateRecord();
+            updateIntro();
         }
     });
 }
@@ -448,9 +453,10 @@ $(document).ready(function() { /* call functions to initialize all needed variab
     if (!getLocalStorageStatus()) {
         alert("It appears your localStorage is unavailable, or full. This page uses localStorage to store previous records and a full play history but is not required to play.");
     }
-    checkStorage();
+    if (!checkStorage()) {
+        startIntro();
+    }
     initGame();
     pageClose();
     helpClick();
-    startIntro();
 })
