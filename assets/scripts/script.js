@@ -188,6 +188,7 @@ function getHistory() {
 
 function checkStorage() { /* check if localStorage has data for today */
     getHistory();
+    /* TODO add theme check once implemented */
     if (history) {
         for (let dailyData of history) {
             if (dailyData[0] === localDate) { /* if data for today exists, update daily vars based on previous data, otherwise keep as 0 */
@@ -199,23 +200,15 @@ function checkStorage() { /* check if localStorage has data for today */
     }
     if (localStorage.getItem("record")) {
         record = localStorage.getItem("record");
-    }
-    if (localStorage.getItem("intro")) {
-        return true;
+        return true; /* return value is used to check whether intro.js should autorun or not */
     } else {
         return false;
     }
-} /* TODO add theme check once implemented */
+} 
 
 function updateRecord() {
     if (!localStorage.getItem("record") || localStorage.getItem("record") < record) {
         localStorage.setItem("record", record);
-    }
-}
-
-function updateIntro() { /* Add intro item to localStorage to prevent intro from launching on every refresh */
-    if (!localStorage.getItem("intro")) {
-        localStorage.setItem("intro", "1");
     }
 }
 
