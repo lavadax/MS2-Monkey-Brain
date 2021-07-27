@@ -444,7 +444,6 @@ function pageClose() { /* update history and record upon closing the page */
         if (getLocalStorageStatus() && dailyAttempts){ /* update localstorage when localstorage is available & at least 1 game was played today */
             updateHistory();
             updateRecord();
-            updateIntro();
         }
     });
 }
