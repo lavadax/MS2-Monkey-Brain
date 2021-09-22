@@ -4,7 +4,7 @@ const svgNS = "http://www.w3.org/2000/svg"
 let xCoord;
 let yCoord;
 let coordList = []; /* array will contain previously used coords formatted as a string with / between X and Y coords eg: ["28/74","134/42"] */
-let circles = 6; /* determines how many circles will be drawn. */
+let circles = 5; /* determines how many circles will be drawn. */
 let counter; /* counter used for keeping track of how many circles have been drawn. initializing here to expand scope */
 let width; /* initializing vh and vw variables to expand scope */
 let height;
@@ -121,7 +121,7 @@ function checkCircle(event) {
         }
     } else {
         alert("Oops, you missed it!");
-        circles = 6
+        circles = 5
         gameStop();
     }
 }
@@ -415,7 +415,7 @@ function startIntro() {
 function checkRunning() {
     if (!gameRunning) {
         gameSetup(circles);
-        if (circles === 6) {
+        if (circles === 5) {
             dailyAttempts++;;
         }
     } else {
