@@ -21,10 +21,12 @@ let dailyRecord = 0;
 let today = new Date();
 let localDate = today.toISOString().slice(0,10);
 let history = [];
-let limit = 7;
+let limit;
+let months;
 let labels;
 let attempts;
 let records;
+let myChart;
 
 /* functions needed for gameSetup */
 
@@ -126,22 +128,96 @@ function checkCircle(event) {
 
 /* functions needed for historySetup() */
 
-function getLimit() {
-    if (history.length < 7) {
-        limit = history.length;
+function getLimit(period) {
+    limit = 7;
+    switch (period) {
+        case "Day":
+            if (history.length < 7) { /* if less than 7 recorded days, limit length to amount of recorded days */
+                limit = history.length;
+            }
+            break;
+        case "Week":
+            break;
+        case "Month":
+            months = [];
+            let arrayLength = history.length-1;
+            for (let i = arrayLength; arrayLength-i <= arrayLength; i--) { /* iterate through localstorage history */
+                let temp = history[i][0].slice(0,7); /* extract yyyy-mm of localstorage history */
+                switch (months.indexOf(temp)) {
+                    case -1:
+                        months.push(temp);
+                        break;
+                    default:
+                        break;
+                }
+                if (months.length === 7) { /* break out of loop when 7 months are recorded */
+                    break;
+                }
+            }
+            limit = months.length;
+            break;
+        default:
+            console.log("bug in getLimit() period");
+            break;
     }
 }
 
-function getData(index) {
+function getData(index, period) {
     let tempArray = [];
     let arrayLength = history.length-1;
-    for (let i = arrayLength; arrayLength-i < limit; i--) {
-        tempArray.unshift(history[i][index]);
+    switch (period) {
+        case "Day":
+            for (let i = arrayLength; arrayLength-i < limit; i--) {
+                tempArray.unshift(history[i][index]);
+            }
+            break;
+        case "Week": /* TODO */
+            break;
+        case "Month":
+            for (let i = 0; i < limit; i++) {
+                tempArray[i] = 0;
+            }
+            switch (index){
+                case 1: /* add all attempts that match the charted months */
+                    for (let i = arrayLength; arrayLength-i <= arrayLength; i--) {
+                        switch (months.indexOf(history[i][0].slice(0,7))) {
+                            case -1:
+                                break;
+                            default:
+                                tempArray[months.indexOf(history[i][0].slice(0,7))] += history[i][1];
+                                break;
+                        }
+                    }
+                    break;
+                case 2: /* get max of all records that match the charted months */
+                    for (let i = arrayLength; arrayLength-i <= arrayLength; i--) {
+                        switch (months.indexOf(history[i][0].slice(0,7))) {
+                            case -1:
+                                break;
+                            default:
+                                if (history[i][2] > tempArray[months.indexOf(history[i][0].slice(0,7))]) {
+                                    tempArray[months.indexOf(history[i][0].slice(0,7))] = history[i][2];
+                                }
+                                break;
+                        }
+                    }
+                    break;
+                default:
+                    console.log("bug in getData() index");
+                    break;
+            }
+            break;
+        default:
+            console.log("bug in getData() period");
+            break;
     }
     return tempArray;
 }
 
 function setupChart() { /* testing chart function with assumption of max 7 entries */
+    if (myChart) {
+        myChart.destroy();
+    }
     let configData = {
         type: "scatter",
         data: {
@@ -168,7 +244,7 @@ function setupChart() { /* testing chart function with assumption of max 7 entri
             }
         }
     }
-    let myChart = new Chart($("#chart-area"),configData);
+    myChart = new Chart($("#chart-area"),configData);
 }
 
 function noGames() {
@@ -294,7 +370,7 @@ function initHistory() {
 
 /* introJS functions */
 
-function startIntro() { // TODO add check for gameRunning and ask for user confirmation as this will finish current game
+function startIntro() {
     introJs().setOptions({
         steps: [{
             title: "Welcome",
@@ -337,9 +413,9 @@ function startIntro() { // TODO add check for gameRunning and ask for user confi
 /* function callers */
 
 function checkRunning() {
-    if(!gameRunning) {
+    if (!gameRunning) {
         gameSetup(circles);
-        if(circles === 6) {
+        if (circles === 6) {
             dailyAttempts++;;
         }
     } else {
@@ -372,14 +448,26 @@ function gameStart() { /* main function that calls other functions in order when
     startGameClick();
 }
 
-function historySetup() { /* TODO adjust chart & vars based on periodicity */
+function historySetup(period) { /* TODO adjust chart & vars based on periodicity */
     if (dailyAttempts) {
         updateHistory();
     }
-    getLimit();
-    labels = getData(0);
-    attempts = getData(1);
-    records = getData(2);
+    getLimit(period);
+    switch (period) {
+        case "Day":
+            labels = getData(0,period);
+            break;
+        case "Week":
+            break; /* TODO */
+        case "Month":
+            labels = months;
+            break;
+        default:
+            console.log("bug in historySetup() period")
+            break;
+    }
+    attempts = getData(1, period);
+    records = getData(2, period);
     setupChart();
 }
 
@@ -387,8 +475,15 @@ function historySetup() { /* TODO adjust chart & vars based on periodicity */
 
 function helpClick() { /* help button event listener */
     $("#help-button").click(function () {
-        initGame();
-        startIntro();
+        if(gameRunning){
+            if(confirm("This will stop the current game and you'll have to start over. Are you sure?")){
+                initGame();
+                startIntro();
+            }
+        } else {
+            initGame();
+            startIntro();
+        }
     })
 }
 
@@ -404,7 +499,7 @@ function historyClick() {
         if (!dailyAttempts && !localStorage.getItem("history")) {
             noGames();
         } else {
-            historySetup();
+            historySetup("Day");
         }
     })
 }
@@ -432,10 +527,11 @@ function startGameClick() {
 
 function periodicClick() {
     $(".periodic .dropdown-menu .dropdown-item").click(function() {
-        $(".periodic button").html($(this).html());
+        let el = $(this);
+        $(".periodic button").html(el.text());
         $(".periodic .dropdown-menu .dropdown-item").removeClass("active");
-        $(this).addClass("active");
-        /* TODO add function to setup graph based on periodicity in dropdown (look into chartjs) */
+        el.addClass("active");
+        historySetup(el.text());
     })
 }
 
