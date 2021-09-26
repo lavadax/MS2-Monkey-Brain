@@ -624,10 +624,10 @@ $(document).ready(function() { /* call functions to initialize all needed variab
     if (!getLocalStorageStatus()) {
         alert("It appears your localStorage is unavailable, or full. This page uses localStorage to store previous records and a full play history but is not required to play.");
     }
-    if (!checkStorage()) {
-        startIntro();
-    }
     initGame();
     pageClose();
     helpClick();
+    if (!checkStorage()) {
+        startIntro();
+    }
 })
