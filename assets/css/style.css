@@ -48,7 +48,7 @@ header .container, header .row {
     margin:0;
 }
 
-#help-button {
+#settings-button, #help-button {
     float: right;
     width: 80px;
     height: 60px;
@@ -58,13 +58,14 @@ header .container, header .row {
     background-color: #000;
     border: 2px solid #FF2525;
     margin-top: 20px;
+    margin-left: 15px;
     padding: 15px 0;
     border-radius: 7px;
     transition: all 0.2s ease-in-out;
     font-weight: bold;
 }
 
-#help-button:hover {
+#settings-button:hover, #help-button:hover {
     color: #000;
     background-color: #fff;
     border-color: #FF2525;
