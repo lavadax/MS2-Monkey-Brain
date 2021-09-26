@@ -50,7 +50,6 @@ header .container, header .row {
 
 #settings-button, #help-button {
     float: right;
-    width: 80px;
     height: 60px;
     text-align: center;
     text-decoration: none;
@@ -63,6 +62,14 @@ header .container, header .row {
     border-radius: 7px;
     transition: all 0.2s ease-in-out;
     font-weight: bold;
+}
+
+#help-button {
+    width: 70px;
+}
+
+#settings-button {
+    width: 100px;
 }
 
 #settings-button:hover, #help-button:hover {
