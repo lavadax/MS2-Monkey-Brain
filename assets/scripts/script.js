@@ -22,6 +22,7 @@ let today = new Date();
 let localDate = today.toISOString().slice(0,10);
 let history = [];
 let limit;
+let weeks;
 let months;
 let labels;
 let attempts;
@@ -128,8 +129,16 @@ function checkCircle(event) {
 
 /* functions needed for historySetup() */
 
+function calcWeek(date) {
+    let currDate = new Date(parseInt(date.slice(0, 4)), parseInt(date.slice(5, 7)) - 1, parseInt(date.slice(8)));
+    let offset = (currDate.getDay() + 6) % 7; /* offsetting the date so weeks start on Monday */
+    return (date.slice(0, 8).concat((parseInt(date.slice(8) - offset).toString()))); /* TODO works for week falling in the middle of the month, if week spans multiple months it breaks. */ 
+}
+
 function getLimit(period) {
     limit = 7;
+    let temp;
+    let arrayLength;
     switch (period) {
         case "Day":
             if (history.length < 7) { /* if less than 7 recorded days, limit length to amount of recorded days */
@@ -137,12 +146,29 @@ function getLimit(period) {
             }
             break;
         case "Week":
+            weeks = [];
+            let weekStart;
+            arrayLength = history.length-1;
+            for (let i = arrayLength; arrayLength-i <= arrayLength; i--) { /* iterate through localstorage history */
+                weekStart = calcWeek(history[i][0]);
+                switch (weeks.indexOf(weekStart)) {
+                    case -1:
+                        weeks.push(weekStart);
+                        break;
+                    default:
+                        break;
+                }
+                if (weeks.length === 7) { /* break out of loop when 7 weeks are recorded */
+                    break;
+                }
+            }
+            limit = weeks.length;
             break;
         case "Month":
             months = [];
-            let arrayLength = history.length-1;
+            arrayLength = history.length-1;
             for (let i = arrayLength; arrayLength-i <= arrayLength; i--) { /* iterate through localstorage history */
-                let temp = history[i][0].slice(0,7); /* extract yyyy-mm of localstorage history */
+                temp = history[i][0].slice(0,7); /* extract yyyy-mm of localstorage history */
                 switch (months.indexOf(temp)) {
                     case -1:
                         months.push(temp);
@@ -171,7 +197,39 @@ function getData(index, period) {
                 tempArray.unshift(history[i][index]);
             }
             break;
-        case "Week": /* TODO */
+        case "Week":
+            for (let i = 0; i < limit; i++) {
+                tempArray[i] = 0;
+            }
+            switch(index) {
+                case 1: /* add all attempts that match the charted weeks */
+                    for (let i = arrayLength; arrayLength-i <= arrayLength; i--) {
+                        switch (weeks.indexOf(calcWeek(history[i][0]))) {
+                            case -1:
+                                break;
+                            default:
+                                tempArray[weeks.indexOf(calcWeek(history[i][0]))] += history[i][1];
+                                break;
+                        }
+                    }
+                    break;
+                case 2: /* get max of all records that match the charted weeks */
+                    for (let i = arrayLength; arrayLength-i <= arrayLength; i--) {
+                        switch (weeks.indexOf(calcWeek(history[i][0]))) {
+                            case -1:
+                                break;
+                            default:
+                                if (history[i][2] > tempArray[weeks.indexOf(calcWeek(history[i][0]))]) {
+                                    tempArray[weeks.indexOf(calcWeek(history[i][0]))] = history[i][2];
+                                }
+                                break;
+                        }
+                    }
+                    break;
+                default:
+                    console.log("bug in getData() index");
+                    break;
+            }
             break;
         case "Month":
             for (let i = 0; i < limit; i++) {
@@ -448,7 +506,7 @@ function gameStart() { /* main function that calls other functions in order when
     startGameClick();
 }
 
-function historySetup(period) { /* TODO adjust chart & vars based on periodicity */
+function historySetup(period) {
     if (dailyAttempts) {
         updateHistory();
     }
@@ -458,7 +516,8 @@ function historySetup(period) { /* TODO adjust chart & vars based on periodicity
             labels = getData(0,period);
             break;
         case "Week":
-            break; /* TODO */
+            labels = weeks;
+            break;
         case "Month":
             labels = months;
             break;
