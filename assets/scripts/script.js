@@ -211,7 +211,7 @@ function getData(index, period) {
     switch (period) {
         case "Day":
             for (let i = arrayLength; arrayLength-i < limit; i--) {
-                tempArray.unshift(history[i][index]);
+                tempArray.push(history[i][index]);
             }
             break;
         case "Week":
@@ -286,7 +286,7 @@ function getData(index, period) {
             console.log("bug in getData() period");
             break;
     }
-    return tempArray;
+    return tempArray.reverse();
 }
 
 function setupChart() { /* testing chart function with assumption of max 7 entries */
@@ -528,22 +528,22 @@ function historySetup(period) {
         updateHistory();
     }
     getLimit(period);
+    attempts = getData(1, period);
+    records = getData(2, period);
     switch (period) {
         case "Day":
             labels = getData(0,period);
             break;
         case "Week":
-            labels = weeks;
+            labels = weeks.reverse();
             break;
         case "Month":
-            labels = months;
+            labels = months.reverse();
             break;
         default:
             console.log("bug in historySetup() period")
             break;
     }
-    attempts = getData(1, period);
-    records = getData(2, period);
     setupChart();
 }
 
