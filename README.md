@@ -258,5 +258,6 @@ Project Link: [https://github.com/lavadax/MS2-Monkey-Brain](https://github.com/l
 * [w3schools.com](https://www.w3schools.com/html/html5_svg.asp): for instructions on how to use an SVG and draw on it.
 * [riptutorial.com](https://riptutorial.com/svg/example/17729/creating-an-element): For showcasing SVG a bit more, and to fill in gaps of my knowledge after going through w3schools.  
 * [stackoverflow.com](https://stackoverflow.com/questions/2989284/what-is-the-max-size-of-localstorage-values): For space limitations on localStorage.  
+* [stackoverflow.com](https://stackoverflow.com/questions/33855641/copy-output-of-a-javascript-variable-to-the-clipboard): for the basis of the export function.  
 * [dev.to/zigabrencic](https://dev.to/zigabrencic/web-browser-local-storage-16jh): for the localStorage check.
-* [favicon.io](https://favicon.io/favicon-converter/): for generating the favicon files.
+* [favicon.io](https://favicon.io/favicon-converter/): for generating the favicon files.  
