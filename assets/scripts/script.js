@@ -132,7 +132,24 @@ function checkCircle(event) {
 function calcWeek(date) {
     let currDate = new Date(parseInt(date.slice(0, 4)), parseInt(date.slice(5, 7)) - 1, parseInt(date.slice(8)));
     let offset = (currDate.getDay() + 6) % 7; /* offsetting the date so weeks start on Monday */
-    return (date.slice(0, 8).concat((parseInt(date.slice(8) - offset).toString()))); /* TODO works for week falling in the middle of the month, if week spans multiple months it breaks. */ 
+    let start = new Date(currDate.getTime() - (offset * 86400000));
+    let monthString = (start.getMonth()+1).toString();
+    let dayString = start.getDate().toString();
+    switch (monthString.length) {
+        case 1:
+            monthString = "0".concat(monthString);
+            break;
+        default:
+            break;
+    }
+    switch (dayString.length) {
+        case 1:
+            dayString = "0".concat(dayString);
+            break;
+        default:
+            break;
+    }
+    return (`${start.getFullYear()}-${monthString}-${dayString}`); /* TODO works for week falling in the middle of the month, if week spans multiple months it breaks. */ 
 }
 
 function getLimit(period) {
@@ -194,7 +211,7 @@ function getData(index, period) {
     switch (period) {
         case "Day":
             for (let i = arrayLength; arrayLength-i < limit; i--) {
-                tempArray.unshift(history[i][index]);
+                tempArray.push(history[i][index]);
             }
             break;
         case "Week":
@@ -269,7 +286,7 @@ function getData(index, period) {
             console.log("bug in getData() period");
             break;
     }
-    return tempArray;
+    return tempArray.reverse();
 }
 
 function setupChart() { /* testing chart function with assumption of max 7 entries */
@@ -511,22 +528,22 @@ function historySetup(period) {
         updateHistory();
     }
     getLimit(period);
+    attempts = getData(1, period);
+    records = getData(2, period);
     switch (period) {
         case "Day":
             labels = getData(0,period);
             break;
         case "Week":
-            labels = weeks;
+            labels = weeks.reverse();
             break;
         case "Month":
-            labels = months;
+            labels = months.reverse();
             break;
         default:
             console.log("bug in historySetup() period")
             break;
     }
-    attempts = getData(1, period);
-    records = getData(2, period);
     setupChart();
 }
 
