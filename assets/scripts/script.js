@@ -132,7 +132,24 @@ function checkCircle(event) {
 function calcWeek(date) {
     let currDate = new Date(parseInt(date.slice(0, 4)), parseInt(date.slice(5, 7)) - 1, parseInt(date.slice(8)));
     let offset = (currDate.getDay() + 6) % 7; /* offsetting the date so weeks start on Monday */
-    return (date.slice(0, 8).concat((parseInt(date.slice(8) - offset).toString()))); /* TODO works for week falling in the middle of the month, if week spans multiple months it breaks. */ 
+    let start = new Date(currDate.getTime() - (offset * 86400000));
+    let monthString = (start.getMonth()+1).toString();
+    let dayString = start.getDate().toString();
+    switch (monthString.length) {
+        case 1:
+            monthString = "0".concat(monthString);
+            break;
+        default:
+            break;
+    }
+    switch (dayString.length) {
+        case 1:
+            dayString = "0".concat(dayString);
+            break;
+        default:
+            break;
+    }
+    return (`${start.getFullYear()}-${monthString}-${dayString}`); /* TODO works for week falling in the middle of the month, if week spans multiple months it breaks. */ 
 }
 
 function getLimit(period) {
