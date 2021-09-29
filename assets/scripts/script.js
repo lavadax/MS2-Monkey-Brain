@@ -615,11 +615,10 @@ function importClick() {
     $("#import").click(function() {
         let confirm = prompt("Paste your save data below and then click OK to import your data.");
         if (confirm === null || confirm === "") {
-        } else if (confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "[" && confirm.charAt(4) === "\\" && confirm.charAt(5) === `"`) {
+        } else if (confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "[" && confirm.charAt(4) === "\\" && confirm.charAt(5) === `"`) { /* Rudimentary check for valid data */
             localStorage.setItem("history", JSON.parse(confirm)[0]);
             localStorage.setItem("record", JSON.parse(confirm)[1]);
-            updateHistory();
-            updateRecord();
+            checkStorage(); /* updating local variables with localStorage data */
         } else {
             alert("The imported save was invalid.");
         }
