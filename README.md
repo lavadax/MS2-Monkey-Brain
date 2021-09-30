@@ -11,7 +11,7 @@
   ### Monkey Brain
 
   <p align="center">
-    2nd milestone project for CodeInstitute course. This is focused on HTML, CSS and JS. subject of the project is based on the Ai Project from the Primate Research Institute in Kyoto.
+    2nd milestone project for CodeInstitute course. This is focused on HTML, CSS and JS. Subject of the project is based on the Ai Project from the Primate Research Institute in Kyoto.
     <br />
     <a href="https://github.com/lavadax/MS2-Monkey-Brain"><strong>Explore the docs »</strong></a>
     <br />
@@ -90,7 +90,10 @@
 * [Gitpod](https://www.gitpod.io/) / [Gitpod Chrome extension](https://chrome.google.com/webstore/detail/gitpod-dev-environments-i/dodmmooeoklaejobgleioelladacbeki) - Used to develop the site and push the project to Github.
 * [FontAwesome](https://fontawesome.com/) - Used to add icons for social media links.
 * [GitHub](https://github.com) - Used to host the project during and after development.
-* [MockFlow](https://mockflow.com/) - Used to set up the wireframes at the start of the dev cycle.
+* [MockFlow](https://mockflow.com/) - Used to set up the wireframes at the start of the dev cycle.  
+* [favicon.io](https://favicon.io/favicon-converter/) - Used to generate the favicon files.  
+* [Chart.js](https://www.chartjs.org/) - Used to create the charts for the history tab.  
+* [Intro.js](https://introjs.com/) - Used to add an easily understandable introduction to the page.
 
 
 
@@ -101,25 +104,25 @@
 
 The project was deployed to GitHub Pages using the following steps...
 
-1. Log in to GitHub and locate the [GitHub Repository](https://github.com/)
+1. Log in to [GitHub](https://github.com/) and locate the GitHub Repository.
 2. At the top of the Repository (not top of page), locate the "Settings" Button on the menu.
 3. On the left hand side, click the "Pages" section.
 4. Under "Source", click the dropdown called "None" and select "Master Branch".
 5. Click "Save".
 6. The page will automatically refresh.
-7. Locate the now published site [link](https://github.com) in the Green box on the top part of the page.
+7. Locate the now published site link in the Green box on the top part of the page.
 
 ### Forking the GitHub Repository
 
 By forking the GitHub Repository we make a copy of the original repository on our GitHub account to view and/or make changes without affecting the original repository by using the following steps...
 
-1. Log in to GitHub and locate the [GitHub Repository](https://github.com/)
+1. Log in to [GitHub](https://github.com/) and locate the GitHub Repository.
 2. At the top right of the Repository (not top of page) just above the "Settings" Button on the menu, locate the "Fork" Button.
 3. You should now have a copy of the original repository in your GitHub account.
 
 ### Making a Local Clone
 
-1. Log in to GitHub and locate the [GitHub Repository](https://github.com/)
+1. Log in to [GitHub](https://github.com/) and locate the GitHub Repository.
 2. Under the repository name, click "Clone or download".
 3. To clone the repository using HTTPS, under "Clone with HTTPS", copy the link.
 4. Open Git Bash
@@ -175,8 +178,8 @@ x.0.0 Edits are reserved for major milestones explained below.
 0.2.0: Basic usage: Basic HTML and CSS are up and running on PC screens without major issues.  
 0.3.0: Basic responsiveness: Page is responsive for all screensizes without major issues.  
 1.0.0: Basic javascript: Basic javascript is up and running, completing minimum goals of the project.  
-2.0.0: Save state: Added usage of cookies and save export.  
-3.0.0: More options: expansion on 1.0.0 by adding options on page themes.  
+2.0.0: Save state: Added usage of local storage and save export.  
+3.0.0: More options: expansion on 2.0.0 by adding options on page themes.  
 
 ### Future Plans
 
@@ -187,10 +190,14 @@ See the [open issues](https://github.com/lavadax/MS2-Monkey-Brain/issues) for a 
 
 ### Past Issues
 
-See the [closed issues](https://github.com/lavadax/MS2-Monkey-Brain/issues?q=is%3Aissue+is%3Aclosed) for a list of the closed issues.
+See the [closed issues](https://github.com/lavadax/MS2-Monkey-Brain/issues?q=is%3Aissue+is%3Aclosed) for a list of the past issues.
 
-Other past issues to note:  
-* When testing the collision detection script initially, it would infinitely loop around 20-25% of the time due to incorrect variable manipulation turning integers into strings while checking overlap.
+Notable past issues:  
+* When testing the collision detection script initially, it would infinitely loop around 20-25% of the time due to incorrect variable manipulation turning integers into strings while checking overlap.  
+* While the initial plan was to use cookies to save data, I decided to move to local storage instead, at the suggestion of my mentor.
+* Initial feedback from friends was heavily focused on needing an introduction/tutorial of the page, as the purpose/navigation wasn't easily figured out, requiring the unplanned use of Intro.js.
+* As the historical data is stored as a string in local storage, converting it to specific days/months was easy, but sorting by week required a more complex solution of changing the string to a date object and then checking for specific weekdays.  
+* Importing data worked smoothly once I figured out how to copy variable data, but due to how I set up the function calls, if there was data saved locally for the current date, while also importing data for the current date, the data would be added together giving an incorrect result.
 
 ### Site & Methodology Changes
 
@@ -201,8 +208,9 @@ As I had no backend information on either option, I went with the suggestion and
 At some point I got concerned about storage limitation so I ran some tests, and here are the results:
 ![localStorage commands](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/localStorage.png)  
 Based on the results, I can reasonably assume that if someone plays 1000 times, every single day, I can store upwards of 722 days of data.  
+Even after the exact syntax of the localStorage has changed, I would still estimate the browser would have roughly 500 days worth of space.
 
-Initial plan was to use a canvas as a game area, however it quickly became clear that hooking event listeners to auto-generated objects would require a lot of effort, so I changed my focus to SVG instead.
+The initial plan was to use a canvas as a game area, however it quickly became clear that hooking event listeners to auto-generated objects would require a lot of effort, so I changed my focus to SVG instead.
 
 <!-- TESTING TODO-->
 ## Testing
@@ -254,10 +262,10 @@ Project Link: [https://github.com/lavadax/MS2-Monkey-Brain](https://github.com/l
 
 * [github.com/othneildrew](https://github.com/othneildrew/Best-README-Template): for providing the readme template.
 * [github.com/Code-Institute-Solutions](https://github.com/Code-Institute-Solutions/SampleREADME): for filling in gaps in the readme template.
-* [github.com/lavadax](https://github.com/lavadax/MS1-Sheets-Dojo): overall styling from first milestone project used as a template for current project.
-* [w3schools.com](https://www.w3schools.com/html/html5_svg.asp): for instructions on how to use an SVG and draw on it.
-* [riptutorial.com](https://riptutorial.com/svg/example/17729/creating-an-element): For showcasing SVG a bit more, and to fill in gaps of my knowledge after going through w3schools.  
-* [stackoverflow.com](https://stackoverflow.com/questions/2989284/what-is-the-max-size-of-localstorage-values): For space limitations on localStorage.  
-* [stackoverflow.com](https://stackoverflow.com/questions/33855641/copy-output-of-a-javascript-variable-to-the-clipboard): for the basis of the export function.  
-* [dev.to/zigabrencic](https://dev.to/zigabrencic/web-browser-local-storage-16jh): for the localStorage check.
-* [favicon.io](https://favicon.io/favicon-converter/): for generating the favicon files.  
+* [github.com/lavadax](https://github.com/lavadax/MS1-Sheets-Dojo): overall styling from first milestone project used as a template for current project.  
+* [w3schools.com](https://www.w3schools.com): for clarifying various concerns regarding html, css and javascript syntax.
+* [w3schools.com - svg](https://www.w3schools.com/html/html5_svg.asp): for instructions on how to use an SVG and draw on it.
+* [riptutorial.com](https://riptutorial.com/svg/example/17729/creating-an-element): for showcasing SVG a bit more, and to fill in gaps of my knowledge after going through w3schools.  
+* [stackoverflow.com - localstorage](https://stackoverflow.com/questions/2989284/what-is-the-max-size-of-localstorage-values): for space limitations on localStorage.  
+* [stackoverflow.com - js var clipboard](https://stackoverflow.com/questions/33855641/copy-output-of-a-javascript-variable-to-the-clipboard): for the basis of the export function.  
+* [dev.to/zigabrencic](https://dev.to/zigabrencic/web-browser-local-storage-16jh): for the localStorage check. 
