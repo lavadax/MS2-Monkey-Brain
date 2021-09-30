@@ -437,6 +437,7 @@ function initHistory() {
             <button id="game">Game</button>
         </div>
         <canvas id="chart-area"></canvas>
+        <p id="score-text">Highest achieved number: <span id="record">${record}</span></p>
         `
     );
     gameClick();
