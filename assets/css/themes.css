@@ -1,0 +1,146 @@
+/* default theme */
+
+/* body */
+
+body.default {
+    background-color: #fff;
+}
+
+/* header */
+header.default {
+    background-color: #000;
+}
+
+.default#settings-button, .default#help-button {
+    color: #fff;
+    background-color: #000;
+}
+
+/* main-content */
+
+.default.main-content {
+    background-color: #fff;
+}
+/* game tab */
+
+.default#start-game {
+    background-color: #000;
+}
+
+
+.default#history {
+    background-color: #000;
+}
+
+.default#game-area {
+    border: 3px solid #000;
+    background-color: slategray;
+}
+
+/* history tab */
+
+.default.periodic button {
+    background-color: #000;
+}
+
+.default#game {
+    background-color: #000;
+}
+
+.default#chart-area {
+    border: 3px solid black;
+    background-color: white;
+}
+
+/* generic hover */
+
+.default#settings-button:hover, .default#help-button:hover {
+    color: #000;
+    background-color: #fff;
+}
+
+.default#start-game:hover, .default.periodic button:hover, .default#history:hover, .default#game:hover {
+    color: #000;
+    background-color: #fff;
+}
+
+/* footer */
+
+footer.default {
+    background-color: #000;
+    color:#fff;
+}
+
+/* dark theme */
+
+/* body */
+
+body.dark {
+    background-color: slategray;
+}
+
+/* header */
+header.dark {
+    background-color: #000;
+}
+
+.dark#settings-button, .dark#help-button {
+    color: #fff;
+    background-color: #000;
+}
+
+/* main-content */
+
+.dark.main-content {
+    background-color: slategray;
+}
+
+/* game tab */
+
+.dark#start-game {
+    background-color: #000;
+}
+
+
+.dark#history {
+    background-color: #000;
+}
+
+.dark#game-area {
+    border: 3px solid #000;
+    background-color: slategray;
+}
+
+/* history tab */
+
+.dark.periodic button {
+    background-color: #000;
+}
+
+.dark#game {
+    background-color: #000;
+}
+
+.dark#chart-area {
+    border: 3px solid black;
+    background-color: slategray;
+}
+
+/* generic hover */
+
+.dark#settings-button:hover, .dark#help-button:hover {
+    color: #000;
+    background-color: slategray;
+}
+
+.dark#start-game:hover, .dark.periodic button:hover, .dark#history:hover, .dark#game:hover {
+    color: #000;
+    background-color: slategray;
+}
+
+/* footer */
+
+footer.dark {
+    background-color: #000;
+    color:#fff;
+}
