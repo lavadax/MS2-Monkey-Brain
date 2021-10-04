@@ -28,6 +28,7 @@ let labels;
 let attempts;
 let records;
 let myChart;
+let theme;
 
 /* functions needed for gameSetup */
 
@@ -311,10 +312,24 @@ function setupChart() { /* testing chart function with assumption of max 7 entri
                 borderWidth: 3
             }]
         },
-        options: {
-            scales: {
+        options: { // TODO change x axis grid color to #354045 without breaking the scales
+            scales: { 
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    grid: {
+                        borderColor: "#354045",
+                        color: "#354045"
+                    },
+                    ticks: {
+                        color: "#354045"
+                    }
+                }
+            }, 
+            plugins: {
+                legend: {
+                    labels: {
+                        color: "#354045"
+                    }
                 }
             }
         }
@@ -337,9 +352,30 @@ function getHistory() {
     }
 }
 
+function getTheme() {
+    if (localStorage.getItem("theme")) {
+        theme = localStorage.getItem("theme");
+    } else {
+        theme = "default";
+    }
+}
+
+function addTheme(theme) {
+    let elemList = ["body","header","#settings-button","#help-button",".main-content","footer"];
+    if ($("#history").length) {
+        elemList.push("#start-game","#history","#game-area");
+    } else if ($("#game").length) {
+        elemList.push(".periodic","#game","#chart-area");
+    }
+    for (let elem in elemList) {
+        $(elemList[elem]).addClass(theme);
+    }
+}
+
 function checkStorage() { /* check if localStorage has data for today */
     getHistory();
-    /* TODO add theme check once implemented */
+    getTheme();
+    addTheme(theme);
     if (history) {
         for (let dailyData of history) {
             if (dailyData[0] === localDate) { /* if data for today exists, update daily vars based on previous data, otherwise keep as 0 */
@@ -372,6 +408,10 @@ function updateHistory() {
     }
     history.push([localDate,dailyAttempts,dailyRecord]);
     localStorage.setItem("history", JSON.stringify(history));
+}
+
+function updateTheme() {
+    localStorage.setItem("theme",theme);
 }
 
 function getLocalStorageStatus() { /* taken from dev.to/zigabrencic (full link in acknowledgements) */
@@ -419,13 +459,14 @@ function initGame() {
     );
     historyClick();
     startClick();
+    addTheme(theme);
 }
 
 function initHistory() {
     $(".main-content").html(`
         <div class="row" id="button-row">
             <div class="dropdown periodic">
-                <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Day
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -442,6 +483,7 @@ function initHistory() {
     );
     gameClick();
     periodicClick();
+    addTheme(theme);
 }
 
 /* introJS functions */
@@ -619,6 +661,7 @@ function importClick() {
         } else if (confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "[" && confirm.charAt(4) === "\\" && confirm.charAt(5) === `"`) { /* Rudimentary check for valid data */
             localStorage.setItem("history", JSON.parse(confirm)[0]);
             localStorage.setItem("record", JSON.parse(confirm)[1]);
+            localStorage.setItem("theme",JSON.parse(confirm)[2]);
             checkStorage(); /* updating local variables with localStorage data */
         } else {
             alert("The imported save was invalid.");
@@ -633,7 +676,7 @@ function exportClick() {
             updateHistory();
             updateRecord();
         }
-        let expData = JSON.stringify([JSON.stringify(history),record]);
+        let expData = JSON.stringify([JSON.stringify(history),record,theme]);
         let confirm = prompt("Clicking OK will copy the text below. Please save this somewhere so you can import it when needed.", expData);
         if (confirm === null || confirm === "") {
         } else {
@@ -653,6 +696,7 @@ function pageClose() { /* update history and record upon closing the page */
         if (getLocalStorageStatus() && dailyAttempts){ /* update localstorage when localstorage is available & at least 1 game was played today */
             updateHistory();
             updateRecord();
+            updateTheme();
         }
     });
 }
