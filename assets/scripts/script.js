@@ -528,6 +528,41 @@ function startIntro() {
     }).start();
 }
 
+/* import/export functions */
+
+function importData() {
+    let confirm = prompt("Paste your save data below and then click OK to import your data.");
+        if (confirm === null || confirm === "") {
+        } else if (confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "[" && confirm.charAt(4) === "\\" && confirm.charAt(5) === `"`) { /* Rudimentary check for valid data */
+            localStorage.setItem("history", JSON.parse(confirm)[0]);
+            localStorage.setItem("record", JSON.parse(confirm)[1]);
+            localStorage.setItem("theme",JSON.parse(confirm)[2]);
+            checkStorage(); /* updating local variables with localStorage data */
+        } else {
+            alert("The imported save was invalid.");
+        }
+}
+
+function exportData() {
+    localStorage.setItem("history",JSON.stringify([["2020-12-28",8,10],["2020-12-31",7,12],["2021-01-01",5,10],["2021-01-07",12,7],["2021-01-08",11,7],["2021-01-11",3,6]]));
+        if (getLocalStorageStatus() && dailyAttempts){ /* update localstorage when localstorage is available & at least 1 game was played today */
+            updateHistory();
+            updateRecord();
+        }
+        let expData = JSON.stringify([JSON.stringify(history),record,theme]);
+        let confirm = prompt("Clicking OK will copy the text below. Please save this somewhere so you can import it when needed.", expData);
+        if (confirm === null || confirm === "") {
+        } else {
+            let expText = document.createElement("input");
+            document.body.appendChild(expText);
+            expText.setAttribute("id","expText");
+            document.getElementById("expText").value = expData;
+            expText.select();
+            document.execCommand("copy");
+            document.body.removeChild(expText);
+        }
+}
+
 /* function callers */
 
 function checkRunning() {
@@ -656,38 +691,13 @@ function periodicClick() {
 
 function importClick() {
     $("#import").click(function() {
-        let confirm = prompt("Paste your save data below and then click OK to import your data.");
-        if (confirm === null || confirm === "") {
-        } else if (confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "[" && confirm.charAt(4) === "\\" && confirm.charAt(5) === `"`) { /* Rudimentary check for valid data */
-            localStorage.setItem("history", JSON.parse(confirm)[0]);
-            localStorage.setItem("record", JSON.parse(confirm)[1]);
-            localStorage.setItem("theme",JSON.parse(confirm)[2]);
-            checkStorage(); /* updating local variables with localStorage data */
-        } else {
-            alert("The imported save was invalid.");
-        }
+        importData();
     })
 }
 
 function exportClick() {
     $("#export").click(function() {
-        localStorage.setItem("history",JSON.stringify([["2020-12-28",8,10],["2020-12-31",7,12],["2021-01-01",5,10],["2021-01-07",12,7],["2021-01-08",11,7],["2021-01-11",3,6]]));
-        if (getLocalStorageStatus() && dailyAttempts){ /* update localstorage when localstorage is available & at least 1 game was played today */
-            updateHistory();
-            updateRecord();
-        }
-        let expData = JSON.stringify([JSON.stringify(history),record,theme]);
-        let confirm = prompt("Clicking OK will copy the text below. Please save this somewhere so you can import it when needed.", expData);
-        if (confirm === null || confirm === "") {
-        } else {
-            let expText = document.createElement("input");
-            document.body.appendChild(expText);
-            expText.setAttribute("id","expText");
-            document.getElementById("expText").value = expData;
-            expText.select();
-            document.execCommand("copy");
-            document.body.removeChild(expText);
-        }
+        exportData();
     })
 }
 
