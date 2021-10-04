@@ -361,15 +361,16 @@ function getTheme() {
 }
 
 function addTheme(theme) {
-    let elemList = ["body","header","#settings-button","#help-button",".main-content","footer"];
+    let elemList = ["body","header","#settings-button","#theme-button","#help-button",".main-content","footer"];
     if ($("#history").length) {
         elemList.push("#start-game","#history","#game-area");
     } else if ($("#game").length) {
         elemList.push(".periodic","#game","#chart-area");
     }
     for (let elem in elemList) {
-        $(elemList[elem]).addClass(theme);
+        $(elemList[elem]).removeClass("default dark").addClass(theme);
     }
+    updateTheme();
 }
 
 function checkStorage() { /* check if localStorage has data for today */
@@ -701,12 +702,21 @@ function exportClick() {
     })
 }
 
+function themeClick() {
+    $(".themes .dropdown-menu .dropdown-item").click(function() {
+        let el = $(this);
+        $(".themes .dropdown-menu .dropdown-item").removeClass("active");
+        el.addClass("active");
+        theme = el.attr("id");
+        addTheme(theme);
+    })
+}
+
 function pageClose() { /* update history and record upon closing the page */
     window.addEventListener("beforeunload", function() {
         if (getLocalStorageStatus() && dailyAttempts){ /* update localstorage when localstorage is available & at least 1 game was played today */
             updateHistory();
             updateRecord();
-            updateTheme();
         }
     });
 }
@@ -725,5 +735,5 @@ $(document).ready(function() { /* call functions to initialize all needed variab
     helpClick();
     importClick();
     exportClick();
-    
+    themeClick();
 })
