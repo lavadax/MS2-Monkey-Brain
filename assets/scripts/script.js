@@ -705,12 +705,15 @@ $(document).ready(function() { /* call functions to initialize all needed variab
     if (!getLocalStorageStatus()) {
         alert("It appears your localStorage is unavailable, or full. This page uses localStorage to store previous records and a full play history but is not required to play.");
     }
-    initGame();
+    if (!checkStorage()) {
+        initGame();
+        startIntro();
+    } else {
+        initGame();
+    }
     pageClose();
     helpClick();
     importClick();
     exportClick();
-    if (!checkStorage()) {
-        startIntro();
-    }
+    
 })
