@@ -21,7 +21,6 @@ header {
     width: 100%;
     float: left;
     border-bottom: 5px solid #CD1717;
-    background-color: #000;
 }
 
 header .container, header .row {
@@ -53,8 +52,6 @@ header .container, header .row {
     height: 60px;
     text-align: center;
     text-decoration: none;
-    color: #fff;
-    background-color: #000;
     border: 2px solid #FF2525;
     margin-top: 20px;
     margin-left: 15px;
@@ -73,8 +70,6 @@ header .container, header .row {
 }
 
 #settings-button:hover, #help-button:hover {
-    color: #000;
-    background-color: #fff;
     border-color: #FF2525;
 }
 
@@ -83,7 +78,7 @@ header .container, header .row {
 .main-content {
     margin-top: 100px;
     min-height: calc(100vh - 185px); /* 185px = sum of header and footer height */
-    padding: calc((100vh - 800px)/2) 0;
+    padding: calc((100vh - 800px)/2) auto;
 }
 
 /* game area */
@@ -98,7 +93,6 @@ header .container, header .row {
     width: 75px;
     margin: 38px 0;
     color: #fff;
-    background-color: #000;
     border: 2px solid #FF2525;
     border-radius: 7px;
     transition: all 0.2s ease-in-out;
@@ -111,7 +105,6 @@ header .container, header .row {
     margin: 38px 0;
     padding: 0;
     color: #fff;
-    background-color: #000;
     border: 2px solid #FF2525;
     border-radius: 7px;
     transition: all 0.2s ease-in-out;
@@ -123,7 +116,6 @@ header .container, header .row {
     width: 75px;
     margin: 38px 0;
     color: #fff;
-    background-color: #000;
     border: 2px solid #FF2525;
     border-radius: 7px;
     transition: all 0.2s ease-in-out;
@@ -135,7 +127,6 @@ header .container, header .row {
     width: 75px;
     margin: 38px 0;
     color: #fff;
-    background-color: #000;
     border: 2px solid #FF2525;
     border-radius: 7px;
     transition: all 0.2s ease-in-out;
@@ -143,8 +134,6 @@ header .container, header .row {
 }
 
 #start-game:hover, .periodic button:hover, #history:hover, #game:hover {
-    color: #000;
-    background-color: #fff;
     border-color: #FF2525;
 }
 
@@ -156,8 +145,6 @@ header .container, header .row {
     height: 400px; /* TODO static size used for testing, will have to be made more responsive down the line */
     max-width: 806px;
     max-height: 406px;
-    border: 3px solid black;
-    background-color: slategray;
 }
 
 #chart-area {
@@ -168,8 +155,6 @@ header .container, header .row {
     height: 400px; /* TODO static size used for testing, will have to be made more responsive down the line */
     max-width: 806px;
     max-height: 406px;
-    border: 3px solid black;
-    background-color: white;
 }
 
 #score-text {
@@ -188,8 +173,6 @@ footer {
     width:100%;
     float: left;
     border-top: 5px solid #CD1717;
-    background-color: #000;
-    color:#fff;
 }
 
 footer .container {
