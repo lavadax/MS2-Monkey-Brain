@@ -564,6 +564,13 @@ function exportData() {
         }
 }
 
+/* theme functions */
+
+function themeHighlight() {
+    $(".themes .dropdown-menu .dropdown-item").removeClass("active");
+    $("#".concat(theme)).addClass("active");
+}
+
 /* function callers */
 
 function checkRunning() {
@@ -705,9 +712,8 @@ function exportClick() {
 function themeClick() {
     $(".themes .dropdown-menu .dropdown-item").click(function() {
         let el = $(this);
-        $(".themes .dropdown-menu .dropdown-item").removeClass("active");
-        el.addClass("active");
         theme = el.attr("id");
+        themeHighlight();
         addTheme(theme);
     })
 }
@@ -736,4 +742,5 @@ $(document).ready(function() { /* call functions to initialize all needed variab
     importClick();
     exportClick();
     themeClick();
+    themeHighlight();
 })
