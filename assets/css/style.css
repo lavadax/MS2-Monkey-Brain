@@ -47,7 +47,7 @@ header .container, header .row {
     margin:0;
 }
 
-#settings-button, #help-button {
+#settings-button, #theme-button, #help-button {
     float: right;
     height: 60px;
     text-align: center;
@@ -65,11 +65,11 @@ header .container, header .row {
     width: 70px;
 }
 
-#settings-button {
+#settings-button, #theme-button {
     width: 100px;
 }
 
-#settings-button:hover, #help-button:hover {
+#settings-button:hover, #theme-button, #help-button:hover {
     border-color: #FF2525;
 }
 

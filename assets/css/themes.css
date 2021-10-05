@@ -11,7 +11,7 @@ header.default {
     background-color: #000;
 }
 
-.default#settings-button, .default#help-button {
+.default#settings-button, .default#theme-button, .default#help-button {
     color: #fff;
     background-color: #000;
 }
@@ -54,7 +54,7 @@ header.default {
 
 /* generic hover */
 
-.default#settings-button:hover, .default#help-button:hover {
+.default#settings .default#theme-button:hover, .default#help-button:hover {
     color: #000;
     background-color: #fff;
 }
@@ -84,7 +84,7 @@ header.dark {
     background-color: #000;
 }
 
-.dark#settings-button, .dark#help-button {
+.dark#settings-button, .dark#theme-button, .dark#help-button {
     color: #fff;
     background-color: #000;
 }
@@ -128,7 +128,7 @@ header.dark {
 
 /* generic hover */
 
-.dark#settings-button:hover, .dark#help-button:hover {
+.dark#settings-button:hover, .dark#theme-button:hover, .dark#help-button:hover {
     color: #000;
     background-color: slategray;
 }

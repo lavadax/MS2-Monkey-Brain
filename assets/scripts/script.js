@@ -361,15 +361,16 @@ function getTheme() {
 }
 
 function addTheme(theme) {
-    let elemList = ["body","header","#settings-button","#help-button",".main-content","footer"];
+    let elemList = ["body","header","#settings-button","#theme-button","#help-button",".main-content","footer"];
     if ($("#history").length) {
         elemList.push("#start-game","#history","#game-area");
     } else if ($("#game").length) {
         elemList.push(".periodic","#game","#chart-area");
     }
     for (let elem in elemList) {
-        $(elemList[elem]).addClass(theme);
+        $(elemList[elem]).removeClass("default dark").addClass(theme);
     }
+    updateTheme();
 }
 
 function checkStorage() { /* check if localStorage has data for today */
@@ -528,6 +529,48 @@ function startIntro() {
     }).start();
 }
 
+/* import/export functions */
+
+function importData() {
+    let confirm = prompt("Paste your save data below and then click OK to import your data.");
+        if (confirm === null || confirm === "") {
+        } else if (confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "[" && confirm.charAt(4) === "\\" && confirm.charAt(5) === `"`) { /* Rudimentary check for valid data */
+            localStorage.setItem("history", JSON.parse(confirm)[0]);
+            localStorage.setItem("record", JSON.parse(confirm)[1]);
+            localStorage.setItem("theme",JSON.parse(confirm)[2]);
+            checkStorage(); /* updating local variables with localStorage data */
+        } else {
+            alert("The imported save was invalid.");
+        }
+}
+
+function exportData() {
+    localStorage.setItem("history",JSON.stringify([["2020-12-28",8,10],["2020-12-31",7,12],["2021-01-01",5,10],["2021-01-07",12,7],["2021-01-08",11,7],["2021-01-11",3,6]]));
+        if (getLocalStorageStatus() && dailyAttempts){ /* update localstorage when localstorage is available & at least 1 game was played today */
+            updateHistory();
+            updateRecord();
+        }
+        let expData = JSON.stringify([JSON.stringify(history),record,theme]);
+        let confirm = prompt("Clicking OK will copy the text below. Please save this somewhere so you can import it when needed.", expData);
+        if (confirm === null || confirm === "") {
+        } else {
+            let expText = document.createElement("input");
+            document.body.appendChild(expText);
+            expText.setAttribute("id","expText");
+            document.getElementById("expText").value = expData;
+            expText.select();
+            document.execCommand("copy");
+            document.body.removeChild(expText);
+        }
+}
+
+/* theme functions */
+
+function themeHighlight() {
+    $(".themes .dropdown-menu .dropdown-item").removeClass("active");
+    $("#".concat(theme)).addClass("active");
+}
+
 /* function callers */
 
 function checkRunning() {
@@ -656,38 +699,22 @@ function periodicClick() {
 
 function importClick() {
     $("#import").click(function() {
-        let confirm = prompt("Paste your save data below and then click OK to import your data.");
-        if (confirm === null || confirm === "") {
-        } else if (confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "[" && confirm.charAt(4) === "\\" && confirm.charAt(5) === `"`) { /* Rudimentary check for valid data */
-            localStorage.setItem("history", JSON.parse(confirm)[0]);
-            localStorage.setItem("record", JSON.parse(confirm)[1]);
-            localStorage.setItem("theme",JSON.parse(confirm)[2]);
-            checkStorage(); /* updating local variables with localStorage data */
-        } else {
-            alert("The imported save was invalid.");
-        }
+        importData();
     })
 }
 
 function exportClick() {
     $("#export").click(function() {
-        localStorage.setItem("history",JSON.stringify([["2020-12-28",8,10],["2020-12-31",7,12],["2021-01-01",5,10],["2021-01-07",12,7],["2021-01-08",11,7],["2021-01-11",3,6]]));
-        if (getLocalStorageStatus() && dailyAttempts){ /* update localstorage when localstorage is available & at least 1 game was played today */
-            updateHistory();
-            updateRecord();
-        }
-        let expData = JSON.stringify([JSON.stringify(history),record,theme]);
-        let confirm = prompt("Clicking OK will copy the text below. Please save this somewhere so you can import it when needed.", expData);
-        if (confirm === null || confirm === "") {
-        } else {
-            let expText = document.createElement("input");
-            document.body.appendChild(expText);
-            expText.setAttribute("id","expText");
-            document.getElementById("expText").value = expData;
-            expText.select();
-            document.execCommand("copy");
-            document.body.removeChild(expText);
-        }
+        exportData();
+    })
+}
+
+function themeClick() {
+    $(".themes .dropdown-menu .dropdown-item").click(function() {
+        let el = $(this);
+        theme = el.attr("id");
+        themeHighlight();
+        addTheme(theme);
     })
 }
 
@@ -696,7 +723,6 @@ function pageClose() { /* update history and record upon closing the page */
         if (getLocalStorageStatus() && dailyAttempts){ /* update localstorage when localstorage is available & at least 1 game was played today */
             updateHistory();
             updateRecord();
-            updateTheme();
         }
     });
 }
@@ -705,12 +731,16 @@ $(document).ready(function() { /* call functions to initialize all needed variab
     if (!getLocalStorageStatus()) {
         alert("It appears your localStorage is unavailable, or full. This page uses localStorage to store previous records and a full play history but is not required to play.");
     }
-    initGame();
+    if (!checkStorage()) {
+        initGame();
+        startIntro();
+    } else {
+        initGame();
+    }
     pageClose();
     helpClick();
     importClick();
     exportClick();
-    if (!checkStorage()) {
-        startIntro();
-    }
+    themeClick();
+    themeHighlight();
 })
