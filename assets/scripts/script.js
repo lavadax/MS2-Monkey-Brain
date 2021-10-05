@@ -150,7 +150,7 @@ function calcWeek(date) {
         default:
             break;
     }
-    return (`${start.getFullYear()}-${monthString}-${dayString}`); /* TODO works for week falling in the middle of the month, if week spans multiple months it breaks. */ 
+    return (`${start.getFullYear()}-${monthString}-${dayString}`);
 }
 
 function getLimit(period) {
@@ -533,12 +533,13 @@ function startIntro() {
 
 function importData() {
     let confirm = prompt("Paste your save data below and then click OK to import your data.");
-        if (confirm === null || confirm === "") {
-        } else if (confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "[" && confirm.charAt(4) === "\\" && confirm.charAt(5) === `"`) { /* Rudimentary check for valid data */
+        if (confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "[" && confirm.charAt(4) === "\\" && confirm.charAt(5) === `"`) { /* Rudimentary check for valid data */
             localStorage.setItem("history", JSON.parse(confirm)[0]);
             localStorage.setItem("record", JSON.parse(confirm)[1]);
             localStorage.setItem("theme",JSON.parse(confirm)[2]);
             checkStorage(); /* updating local variables with localStorage data */
+        } else if (confirm === null || confirm === "") {
+            return; // return when import is empty or user clicked cancel
         } else {
             alert("The imported save was invalid.");
         }
