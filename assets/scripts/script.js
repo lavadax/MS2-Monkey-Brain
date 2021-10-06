@@ -1,25 +1,27 @@
-/* variables needed for gameSetup() */
+// Variables needed for gameSetup()
 
 const svgNS = "http://www.w3.org/2000/svg"
 let xCoord;
 let yCoord;
-let coordList = []; /* array will contain previously used coords formatted as a string with / between X and Y coords eg: ["28/74","134/42"] */
-let circles = 5; /* determines how many circles will be drawn. */
-let counter; /* counter used for keeping track of how many circles have been drawn. initializing here to expand scope */
-let width; /* initializing vh and vw variables to expand scope */
+/* Array will contain previously used coords formatted as a string 
+with / between X and Y coords eg: ["28/74","134/42"] */
+let coordList = []; 
+let circles = 5; // determines how many circles will be drawn.
+let width; // initializing vh and vw variables to expand scope
 let height;
 let gameRunning = false;
 
-/* variables needed for gameStart() */
+// Variables needed for gameStart()
 
 let currentCircle;
 let record = 0;
 
-/* variables needed for historySetup() */
-let dailyAttempts = 0; /* initializing variable for history tab */
+// Variables needed for historySetup()
+
+let dailyAttempts = 0; // Initializing variable for history tab
 let dailyRecord = 0;
-let today = new Date();
-let localDate = today.toISOString().slice(0,10);
+// Storing current date as string to compare to dates extracted from localStorage
+let localDate = new Date().toISOString().slice(0,10);
 let history = [];
 let limit;
 let weeks;
@@ -30,46 +32,59 @@ let records;
 let myChart;
 let theme;
 
-/* functions needed for gameSetup */
+// Functions needed for gameSetup
 
-function addNumber() { /* Add relevant number to the circle elements based on the coords in the array and their index. */
+// Add relevant number to the circle elements based on the coords in the array and their index.
+function addNumber() { 
     coordList.forEach(function(coords, index) {
-        let coordPair = coords.split("/"); /* Take current coord pair, number before / is first in array, number after / is second in array */
+        // Split X and Y coordinates
+        let coordPair = coords.split("/");
+        // Add new text SVG element containing the number matching the circle
         let num = document.createElementNS(svgNS, "text");
-        if(index+1 < 10) {
+        // Determine x coordinate offset based on single or double digit number
+        if (index+1 < 10) {
             num.setAttribute("x", parseInt(coordPair[0])-5);
         } else {
-            num.setAttribute("x", parseInt(coordPair[0])-9); /* Adjust x coordinate to take double digits into consideration */
+            num.setAttribute("x", parseInt(coordPair[0])-9);
         }
+        // Add Y coordinate
         num.setAttribute("y", parseInt(coordPair[1])+5);
+        // Add number based on the index in the coordlist
         num.innerHTML = index + 1;
+        // Add number to the SVG element
         $("#game-area").append(num);
     })
 }
 
-function drawCircles() { /* Draw circle elements inside SVG */ 
-                        /* Code is a slightly modified version of code found on riptutorials.com (link in readme) */
+// Draw circle elements inside the SVG element
+function drawCircles() { 
+    // Code is a slightly modified version of code found on riptutorials.com (link in readme)
     coordList.forEach(function(coords) {
-        let coordPair = coords.split("/"); /* Take current coord pair, number before / is first in array, number after / is second in array */
-        let circle = document.createElementNS(svgNS, "circle"); 
+        let coordPair = coords.split("/");
+        // Create new circle SVG element
+        let circle = document.createElementNS(svgNS, "circle");
+        // Add required SVG attributes (styling, coordinates, radius)
         circle.setAttribute("fill", "white");
-        circle.setAttribute("cx", coordPair[0]); /* set x coord of circle's center to randomly generated x coord, relative to the svg element's top-left corner */
-        circle.setAttribute("cy", coordPair[1]); /* set y coord of circle's center to randomly generated y coord, relative to the svg element's top-left corner */
-        circle.setAttribute("r", 20); /* set circle radius to 20px */
+        circle.setAttribute("cx", coordPair[0]);
+        circle.setAttribute("cy", coordPair[1]);
+        circle.setAttribute("r", 20);
+        // Add circle to the SVG element
         $("#game-area").append(circle);
     })
 }
 
-function addToArray() { /* Add coords to array after checking for collision */
-    coordList.push(xCoord.toString() + "/" + yCoord.toString());
-}
-
-function collisionCheck() { /* Check for collision between new coords and existing coords in array */
-    let col = false; /* initialize as FALSE to show no collision by default (needed for first coords) */
+// Check for collision between new coords and existing coords in array
+function collisionCheck() {
+    // initialize as false to show no collision by default
+    let col = false;
     coordList.forEach(function(coords) {
-        let oldCoords = coords.split("/"); /* refresher on split function taken through w3schools.com */
-        if ((xCoord >= (parseInt(oldCoords[0]) - 45)) && (xCoord <= (parseInt(oldCoords[0]) + 45)) && (yCoord >= (parseInt(oldCoords[1]) - 45)) && (yCoord <= (parseInt(oldCoords[1]) + 45))) { 
-            /* This if was made by tweaking the temporary check that can be found in my js psuedo file */
+        // Split X and Y coordinates
+        let oldCoords = coords.split("/");
+        /* This if statement was made by tweaking the temporary check that can be found in my js psuedo file 
+        checks if the new X coordinate falls inside any of the older circles
+        based on the coordinates of those circles and the 20px radius (+5 px for spacing) */
+        let isColliding = (xCoord >= (parseInt(oldCoords[0]) - 45)) && (xCoord <= (parseInt(oldCoords[0]) + 45)) && (yCoord >= (parseInt(oldCoords[1]) - 45)) && (yCoord <= (parseInt(oldCoords[1]) + 45));
+        if (isColliding) { 
             col = true;
             return col;
         }
@@ -77,14 +92,19 @@ function collisionCheck() { /* Check for collision between new coords and existi
     return col;
 }
 
-function createCoords() { /* Generate coords to determine center point of circle elements */
+/* Generate coordinates to determine center of circle elements 
+numbers will fall between the confines of the SVG element by using width and height variables*/
+function createCoords() {
     xCoord = Math.floor(Math.random() * (width - 40) + 20);
     yCoord = Math.floor(Math.random() * (height - 40) + 20);
 }
 
 
-/* functions needed for gameStart() */
+// Functions needed for gameStart()
 
+/* Check if the newly cleared level is an all-time record
+If a new record is achieved, update the variable and html element
+If a daily record is achieved, update the variable related to local storage */
 function checkRecord() {
     if(circles > record) {
         record = circles;
@@ -95,6 +115,13 @@ function checkRecord() {
     }
 }
 
+/* 
+Notify the player they completed the level
+Check if a record is achieved
+Increase the current level
+Empty the game area
+Start new game with increased difficulty
+*/
 function finishLevel() {
     alert("Congrats, you did it!");
     checkRecord();
@@ -103,6 +130,7 @@ function finishLevel() {
     checkRunning();
 }
 
+// Clear the game field and restart necessary variables
 function gameStop() {
     $("circle").remove();
     $("text").remove();
@@ -110,6 +138,10 @@ function gameStop() {
     coordList = [];
 }
 
+/* 
+Show the circle that matches the current circle index
+Increment the current circle index
+*/
 function incrementCircle() {
     $("text").eq(currentCircle).show(); 
     currentCircle++;
@@ -588,12 +620,12 @@ function checkRunning() {
 function gameSetup(circles) { /* main function that calls other functions in order when setting up the game */
     width = $("#game-area").width();
     height = $("#game-area").height();
-    for (counter = 1; counter <= circles; counter++) {
+    for (let counter = 1; counter <= circles; counter++) {
         createCoords();
         if (collisionCheck()) {
             --counter;
         } else {
-            addToArray();
+            coordList.push(xCoord.toString() + "/" + yCoord.toString());
         }   
     }
     drawCircles();
