@@ -460,8 +460,8 @@ function checkStorage() {
             }
         }
     }
-    record = localStorage.getItem("record");
-    if (record) {
+    if (localStorage.getItem("record")) {
+        record = localStorage.getItem("record");
         // Return value is used to check whether intro.js should autorun or not
         return false; 
     } else {
