@@ -742,6 +742,7 @@ function helpClick() {
         // If a game is running, ask user to confirm the game will be cancelled
         if(gameRunning){
             if(confirm("This will stop the current game and you'll have to start over. Are you sure?")){
+                gameStop();
                 initGame();
                 startIntro();
             }
@@ -763,12 +764,25 @@ function startClick() {
 // History button event listener
 function historyClick() {
     $("#history").click(function() {
-        initHistory();
-        // If there's no recorded games yet, display text, otherwise display chart
-        if (!dailyAttempts && !localStorage.getItem("history")) {
-            noGames();
+        if(gameRunning) {
+            if(confirm("This will stop the current game and you'll have to start over. Are you sure?")){
+                gameStop();
+                initHistory();
+            // If there's no recorded games yet, display text, otherwise display chart
+                if (!dailyAttempts && !localStorage.getItem("history")) {
+                    noGames();
+                } else {
+                    historySetup("Day");
+                }
+            }
         } else {
-            historySetup("Day");
+                initHistory();
+            // If there's no recorded games yet, display text, otherwise display chart
+            if (!dailyAttempts && !localStorage.getItem("history")) {
+                noGames();
+            } else {
+                historySetup("Day");
+            }
         }
     })
 }
