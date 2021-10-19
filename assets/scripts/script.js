@@ -371,7 +371,7 @@ function setupChart() {
                 borderWidth: 3
             }]
         },
-        options: { // TODO change x axis grid color to #354045 without breaking the scales
+        options: {
             scales: { 
                 y: {
                     beginAtZero: true,
@@ -382,8 +382,15 @@ function setupChart() {
                     ticks: {
                         color: "#354045"
                     }
+                },
+                x: {
+                    // type needs to be explicit when using categories and specifying tick color
+                    type: "category",
+                    ticks: {
+                        color: "#354045"
+                    }
                 }
-            }, 
+            },
             plugins: {
                 legend: {
                     labels: {
