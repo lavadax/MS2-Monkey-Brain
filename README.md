@@ -257,12 +257,35 @@ You can see the result below.
 
 ### Testing User Stories
 
-#### First Time Visitor goals
+#### First Time Visitor goals  
+  
+* I want to easily understand the purpose of the site  
+  
+In order to make sure the purpose of the site is clear when opening the page, A simple site introduction has been implemented that will automatically launch when the site is opened.  
+  
+* I want to be able to easily navigate the site and access the content it provides  
+  
+The site content is spread across 2 pages with very minimal navigational elements as a result.  
+All buttons have appropriate text content and have a clear purpose.  
+Every button has a size that makes it easy to both click on with a mouse, or tap with a finger in the case of a mobile device/touch screen functionality.
 
 #### Returning Visitor Goals
+  
+* I want to easily return to where I left off previously  
+  
+At the end of every session, and at specific moments while navigating the site, current progress is saved in localstorage and is loaded again every time the site is opened.
+  
+* I want to easily check my progress so far  
+  
+The site contains a history tab, where the previously achieved progress can be viewed in an easy to read format.  
+  
+* I want the possibility of accessing my previous data on new devices  
+  
+As the current progress is saved in the browser's local storage, progress is limited to only that specific browser, on that specific device.  
+In order to facilitate cross-platform and cross-browser progress, it is possible to extract the progress through the site's export function, and import it into the preferred device/browser.
 
 ### Functional Testing
-
+  
 ### Accessibility Testing
 
 
