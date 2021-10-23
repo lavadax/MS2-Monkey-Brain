@@ -565,7 +565,7 @@ function initHistory() {
             <button id="game">Game</button>
         </div>
         <canvas id="chart-area"></canvas>
-        <p id="score-text">Highest achieved number: <span id="record">${record}</span></p>
+        <p id="score-text">Highest achieved number:&nbsp;<span id="record">${record}</span></p>
         `
     );
     // Set up event listeners & apply theme
