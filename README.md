@@ -97,7 +97,7 @@
 
 
 
-<!-- DEPLOYMENT TODO expand on this-->
+<!-- DEPLOYMENT -->
 ## Deployment
 
 ### GitHub Pages
@@ -156,18 +156,18 @@ All wireframes are in a single file and can be found [here](https://github.com/l
 
 ### User Stories
 
-#### New Users
+#### First Time Visitors
 
 * As a new user, I want to easily understand the purpose of the site.
 * As a new user, I want to be able to easily navigate the site and access the content it provides.
 
-#### Returning Users
+#### Returning Visitors
 
 * As a returning user, I want to easily return to where I left off previously.
 * As a returning user, I want to easily check my progress so far.
 * As a returning user, I want the possibility of accessing my previous data on new devices.
 
-<!-- ROADMAP TODO-->
+<!-- ROADMAP -->
 ## Roadmap
 
 0.0.x Edits are reserved for minor unplanned edits.  
@@ -212,7 +212,7 @@ Even after the exact syntax of the localStorage has changed, I would still estim
 
 The initial plan was to use a canvas as a game area, however it quickly became clear that hooking event listeners to auto-generated objects would require a lot of effort, so I changed my focus to SVG instead.
 
-<!-- TESTING TODO-->
+<!-- TESTING -->
 ## Testing
 
 ### Validation
@@ -257,12 +257,35 @@ You can see the result below.
 
 ### Testing User Stories
 
-#### First Time Visitor goals
+#### First Time Visitor goals  
+  
+* I want to easily understand the purpose of the site  
+  
+In order to make sure the purpose of the site is clear when opening the page, A simple site introduction has been implemented that will automatically launch when the site is opened.  
+  
+* I want to be able to easily navigate the site and access the content it provides  
+  
+The site content is spread across 2 pages with very minimal navigational elements as a result.  
+All buttons have appropriate text content and have a clear purpose.  
+Every button has a size that makes it easy to both click on with a mouse, or tap with a finger in the case of a mobile device/touch screen functionality.
 
 #### Returning Visitor Goals
+  
+* I want to easily return to where I left off previously  
+  
+At the end of every session, and at specific moments while navigating the site, current progress is saved in localstorage and is loaded again every time the site is opened.
+  
+* I want to easily check my progress so far  
+  
+The site contains a history tab, where the previously achieved progress can be viewed in an easy to read format.  
+  
+* I want the possibility of accessing my previous data on new devices  
+  
+As the current progress is saved in the browser's local storage, progress is limited to only that specific browser, on that specific device.  
+In order to facilitate cross-platform and cross-browser progress, it is possible to extract the progress through the site's export function, and import it into the preferred device/browser.
 
 ### Functional Testing
-
+  
 ### Accessibility Testing
 
 
@@ -295,7 +318,7 @@ Project Link: [https://github.com/lavadax/MS2-Monkey-Brain](https://github.com/l
 
 
 
-<!-- ACKNOWLEDGEMENTS TODO-->
+<!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
 * [github.com/othneildrew](https://github.com/othneildrew/Best-README-Template): for providing the readme template.
