@@ -219,13 +219,41 @@ The initial plan was to use a canvas as a game area, however it quickly became c
 
 As the first part of validation, I decided to validate the CSS files using [jigsaw](https://jigsaw.w3.org/css-validator/), as any potential errors would be quick and easy to fix.  
 Both CSS files came back clean without any errors.  
+  
+style.css:  
 ![style.css validation](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/Style-validation.png)  
+  
+themes.css:  
 ![themes.css validation](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/Themes-validation.png)  
   
 Moving on, I ran my html through the [markup validator](https://validator.w3.org) by opening my page and copying the html code, as some of it is applied by javascript.  
-I used the game code as a first test, which unfortunately returned the same code 4 times, along with a warning which can be seen below.   
-![first game validation](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/Game-validation-1.png)
+I used the game code as a first test, which unfortunately returned the same code 4 times, along with a warning which can be seen below.  
+  
+![first game validation](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/Game-validation-1.png)  
+  
+After fixing the aforementioned errors, All that was left was the warning, which didn't affect the page in its current state.  
+putting the history code through the validator gave the same result, as the core html is largely the same across both pages.  
+  
+Game code:  
+![second game validation](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/Game-validation-2.png)  
+  
+History code:  
+![history validation](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/History-validation.png)  
+  
+Lastly, there's the javascript code. for this I used [JSHint](https://jshint.com) to validate the code.  
+After removing any mention of ES6 features, and letting JSHint assume jQuery was being used, I'm left with 24 warnings and 2 undefined variables.  
+The variables were actually native chartJS and introJS variables, so these can be ignored.  
 
+![first javascript validation](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/Javascript-validation-1.png)  
+  
+The most common issue was missing semicolons, which are fixed very easily.  
+This leaves me with 3 warnings: Redefining "history", a "for in" not being wrapped in an if statement, and a misleading line break.  
+Until now I was unaware "history" was a reserved word in javascript, but this is an easy fix: change all mentions of "history" to "hist".  
+Wrapping the for loop in an if statement seemed kind of pointless, so I instead replaced it with a forEach.  
+Lastly, I'm leaving the misleading line break in, since I broke the line in 2 on purpose, to prevent it from becoming too long.
+You can see the result below.  
+  
+![second javascript validation](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/Javascript-validation-2.png)  
 
 ### Testing User Stories
 
