@@ -557,9 +557,9 @@ function initHistory() {
                     Day
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li class="dropdown-item active" id="day">Day</li>
-                    <li class="dropdown-item" id="week">Week</li>
-                    <li class="dropdown-item" id="month">Month</li>
+                    <a class="dropdown-item active" id="day">Day</a>
+                    <a class="dropdown-item" id="week">Week</a>
+                    <a class="dropdown-item" id="month">Month</a>
                 </div>
             </div>
             <button id="game">Game</button>
