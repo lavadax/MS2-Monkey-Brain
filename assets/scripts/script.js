@@ -539,7 +539,7 @@ function initGame() {
             <button id="history">History</button>
         </div>
         <svg id="game-area"></svg>
-        <p id="score-text">Highest achieved number: <span id="record">${record}</span></p>
+        <p id="score-text">Highest achieved number:&nbsp;<span id="record">${record}</span></p>
         `
     );
     // Set up event listeners & apply theme
