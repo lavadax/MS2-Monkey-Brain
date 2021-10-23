@@ -1,6 +1,6 @@
 // Variables needed for gameSetup()
 
-const svgNS = "http://www.w3.org/2000/svg"
+const svgNS = "http://www.w3.org/2000/svg";
 let xCoord;
 let yCoord;
 /* Array will contain previously used coords formatted as a string 
@@ -22,7 +22,7 @@ let dailyAttempts = 0; // Initializing variable for history tab
 let dailyRecord = 0;
 // Storing current date as string to compare to dates extracted from localStorage
 let localDate = new Date().toISOString().slice(0,10);
-let history = [];
+let hist = [];
 let limit;
 let weeks;
 let months;
@@ -53,7 +53,7 @@ function addNumber() {
         num.innerHTML = index + 1;
         // Add number to the SVG element
         $("#game-area").append(num);
-    })
+    });
 }
 
 // Draw circle elements inside the SVG element
@@ -70,7 +70,7 @@ function drawCircles() {
         circle.setAttribute("r", 20);
         // Add circle to the SVG element
         $("#game-area").append(circle);
-    })
+    });
 }
 
 // Check for collision between new coords and existing coords in array
@@ -88,7 +88,7 @@ function collisionCheck() {
             col = true;
             return col;
         }
-    })
+    });
     return col;
 }
 
@@ -156,7 +156,7 @@ function checkCircle(event) {
         // If wrong circle was clicked, stop the game and notify the user
     } else {
         alert("Oops, you missed it!");
-        circles = 5
+        circles = 5;
         gameStop();
     }
 }
@@ -199,12 +199,12 @@ function calcWeek(date) {
 If not change the amount that will be charted */
 function getLimit(period) {
     limit = 7;
-    let arrayLength = history.length-1;
+    let arrayLength = hist.length-1;
     switch (period) {
         case "Day":
             // If less than 7 recorded days, limit length to amount of recorded days1
-            if (history.length < 7) {
-                limit = history.length;
+            if (hist.length < 7) {
+                limit = hist.length;
             }
             break;
         case "Week":
@@ -213,7 +213,7 @@ function getLimit(period) {
             // Iterate through localstorage history
             for (let i = arrayLength; arrayLength-i <= arrayLength; i--) {
                 // Calculate the monday of the week the date falls in
-                weekStart = calcWeek(history[i][0]);
+                weekStart = calcWeek(hist[i][0]);
                 /* If the Monday is already recorded, 
                 go to the next date, otherwise record it */
                 switch (weeks.indexOf(weekStart)) {
@@ -236,7 +236,7 @@ function getLimit(period) {
             // Iterate through localstorage history
             for (let i = arrayLength; arrayLength-i <= arrayLength; i--) {
                 // Extract yyyy-mm of localstorage history
-                let tempMonth = history[i][0].slice(0,7);
+                let tempMonth = hist[i][0].slice(0,7);
                 /* If the month is already recorded, 
                 go to the next date, otherwise record it */
                 switch (months.indexOf(tempMonth)) {
@@ -264,12 +264,12 @@ function getLimit(period) {
 // Extract data from history based on requested data type (index) and period
 function getData(index, period) {
     let tempArray = [];
-    let arrayLength = history.length-1;
+    let arrayLength = hist.length-1;
     switch (period) {
         // If period is day, extract data (attempts and records) without calculations
         case "Day":
             for (let i = arrayLength; arrayLength-i < limit; i--) {
-                tempArray.push(history[i][index]);
+                tempArray.push(hist[i][index]);
             }
             break;
         default:
@@ -286,10 +286,10 @@ function getData(index, period) {
                         // Calculate presence/index of date based on period
                         switch (period) {
                             case "Week":
-                                arrayIndex = weeks.indexOf(calcWeek(history[i][0]));
+                                arrayIndex = weeks.indexOf(calcWeek(hist[i][0]));
                                 break;
                             case "Month":
-                                arrayIndex = months.indexOf(history[i][0].slice(0,7));
+                                arrayIndex = months.indexOf(hist[i][0].slice(0,7));
                                 break;
                             default:
                                 console.log("bug in getData() period");
@@ -300,7 +300,7 @@ function getData(index, period) {
                         otherwise skip it */
                         switch (arrayIndex) {
                             default:
-                                tempArray[arrayIndex] += history[i][1];
+                                tempArray[arrayIndex] += hist[i][1];
                                 break;
                             case -1:
                                 break;
@@ -313,10 +313,10 @@ function getData(index, period) {
                         // Calculate presence/index of date based on period
                         switch (period) {
                             case "Week":
-                                arrayIndex = weeks.indexOf(calcWeek(history[i][0]));
+                                arrayIndex = weeks.indexOf(calcWeek(hist[i][0]));
                                 break;
                             case "Month":
-                                arrayIndex = months.indexOf(history[i][0].slice(0,7));
+                                arrayIndex = months.indexOf(hist[i][0].slice(0,7));
                                 break;
                             default:
                                 console.log("bug in getData() period");
@@ -328,8 +328,8 @@ function getData(index, period) {
                             case -1:
                                 break;
                             default:
-                                if (history[i][2] > tempArray[arrayIndex]) {
-                                    tempArray[arrayIndex] = history[i][2];
+                                if (hist[i][2] > tempArray[arrayIndex]) {
+                                    tempArray[arrayIndex] = hist[i][2];
                                 }
                                 break;
                         }
@@ -399,7 +399,7 @@ function setupChart() {
                 }
             }
         }
-    }
+    };
     myChart = new Chart($("#chart-area"),configData);
 }
 
@@ -416,7 +416,7 @@ function noGames() {
 // Extract localstorage history item into history variable
 function getHistory() {
     if (localStorage.getItem("history")) {
-        history = JSON.parse(localStorage.getItem("history"));
+        hist = JSON.parse(localStorage.getItem("history"));
     }
 }
 
@@ -437,9 +437,9 @@ function addTheme(theme) {
     } else if ($("#game").length) {
         elemList.push(".periodic","#game","#chart-area");
     }
-    for (let elem in elemList) {
-        $(elemList[elem]).removeClass("default dark").addClass(theme);
-    }
+    elemList.forEach(function(item, index, arr) {
+        $(arr[index]).removeClass("default dark").addClass(theme);
+    });
     // Update localstorage theme item
     updateTheme();
 }
@@ -449,8 +449,8 @@ function checkStorage() {
     getHistory();
     getTheme();
     addTheme(theme);
-    if (history) {
-        for (let dailyData of history) {
+    if (hist) {
+        for (let dailyData of hist) {
             /* If data for today exists,
             update daily vars based on previous data, otherwise keep as 0 */
             if (dailyData[0] === localDate) {
@@ -480,15 +480,15 @@ function updateRecord() {
 function updateHistory() {
     getHistory();
     // Check if localstorage history item exists and has at least 1 entry
-    if (history && history.length){
+    if (hist && hist.length){
         // Check if latest history item is from today
-        if (history[history.length-1][0] === localDate) {
-            history.pop();
+        if (hist[hist.length-1][0] === localDate) {
+            hist.pop();
         }
     }
     // Add today's data to history variable, which gets placed in localstorage
-    history.push([localDate,dailyAttempts,dailyRecord]);
-    localStorage.setItem("history", JSON.stringify(history));
+    hist.push([localDate,dailyAttempts,dailyRecord]);
+    localStorage.setItem("history", JSON.stringify(hist));
 }
 
 // Update localstorage theme item
@@ -651,7 +651,7 @@ function exportData() {
             updateRecord();
         }
         // Add history, record and theme to an array for export
-        let expData = JSON.stringify([JSON.stringify(history),record,theme]);
+        let expData = JSON.stringify([JSON.stringify(hist),record,theme]);
         let message = "Please copy the below text and save this somewhere so you can import it when needed.";
         // Using prompt to notify the user so the data is already highlighted
         prompt(message, expData);
@@ -674,7 +674,7 @@ function checkRunning() {
         gameSetup(circles);
         // If the current amount of cirles is 5, add to the daily attempts
         if (circles === 5) {
-            dailyAttempts++;;
+            dailyAttempts++;
         }
     // Alert the user a game can't be started while one is already running
     } else {
@@ -706,7 +706,7 @@ function gameStart() {
     // Unbind the event handlers on the first circle & number
     $("circle").first().unbind(); 
     $("text").first().unbind();
-    currentCircle = 1
+    currentCircle = 1;
     // Hide all numbers except the first
     $("text").not(":first()").hide();
     startGameClick();
@@ -734,7 +734,7 @@ function historySetup(period) {
             break;
         // Error message in case period is not month, week or day
         default:
-            console.log("bug in historySetup() period")
+            console.log("bug in historySetup() period");
             break;
     }
     // Draw the chart based on the data collected above
@@ -757,7 +757,7 @@ function helpClick() {
             initGame();
             startIntro();
         }
-    })
+    });
 }
 
 // Start game event listener
@@ -765,7 +765,7 @@ function startClick() {
     $("#start-game").click(function() {
         // Check if a game is currently running, and start game if needed
         checkRunning();
-    })
+    });
 }
 
 // History button event listener
@@ -791,31 +791,31 @@ function historyClick() {
                 historySetup("Day");
             }
         }
-    })
+    });
 }
 
 // Game button event listener
 function gameClick() {
     $("#game").click(function() {
         initGame();
-    })
+    });
 }
 
 // Add event listener to 1st circle and number
 function setupGameClick() {
     $("circle").first().css("cursor","pointer").click(function() {
         gameStart();
-    })
+    });
     $("text").css("font-weight","bold").first().css("cursor","pointer").click(function() {
         gameStart();
-    })
+    });
 }
 
 // Add event listeners to all circles except the first after the first has been clicked
 function startGameClick() {
     $("circle").not(":first()").css("cursor","pointer").click(function(event) {
         checkCircle(event);
-    })
+    });
 }
 
 // Add event listeners to history period dropdown items
@@ -829,21 +829,21 @@ function periodicClick() {
         el.addClass("active");
         // Set up history with selected period
         historySetup(el.text());
-    })
+    });
 }
 
 // Add event listener to import button
 function importClick() {
     $("#import").click(function() {
         importData();
-    })
+    });
 }
 
 // Add event listener to export button
 function exportClick() {
     $("#export").click(function() {
         exportData();
-    })
+    });
 }
 
 // Add event listeners to theme dropdown items
@@ -855,7 +855,7 @@ function themeClick() {
         themeHighlight();
         // Apply new theme to DOM
         addTheme(theme);
-    })
+    });
 }
 
 // Update history and record upon closing the page
@@ -887,4 +887,4 @@ $(document).ready(function() {
     exportClick();
     themeClick();
     themeHighlight();
-})
+});
