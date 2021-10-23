@@ -97,7 +97,7 @@
 
 
 
-<!-- DEPLOYMENT TODO expand on this-->
+<!-- DEPLOYMENT -->
 ## Deployment
 
 ### GitHub Pages
@@ -156,18 +156,18 @@ All wireframes are in a single file and can be found [here](https://github.com/l
 
 ### User Stories
 
-#### New Users
+#### First Time Visitors
 
 * As a new user, I want to easily understand the purpose of the site.
 * As a new user, I want to be able to easily navigate the site and access the content it provides.
 
-#### Returning Users
+#### Returning Visitors
 
 * As a returning user, I want to easily return to where I left off previously.
 * As a returning user, I want to easily check my progress so far.
 * As a returning user, I want the possibility of accessing my previous data on new devices.
 
-<!-- ROADMAP TODO-->
+<!-- ROADMAP -->
 ## Roadmap
 
 0.0.x Edits are reserved for minor unplanned edits.  
@@ -212,7 +212,7 @@ Even after the exact syntax of the localStorage has changed, I would still estim
 
 The initial plan was to use a canvas as a game area, however it quickly became clear that hooking event listeners to auto-generated objects would require a lot of effort, so I changed my focus to SVG instead.
 
-<!-- TESTING TODO-->
+<!-- TESTING -->
 ## Testing
 
 ### Validation
@@ -295,7 +295,7 @@ Project Link: [https://github.com/lavadax/MS2-Monkey-Brain](https://github.com/l
 
 
 
-<!-- ACKNOWLEDGEMENTS TODO-->
+<!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
 * [github.com/othneildrew](https://github.com/othneildrew/Best-README-Template): for providing the readme template.
