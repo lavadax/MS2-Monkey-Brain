@@ -142,7 +142,7 @@ header .container, header .row {
     margin: auto;
     padding: 0;
     width: 100%;
-    height: 400px; /* TODO static size used for testing, will have to be made more responsive down the line */
+    height: 400px;
     max-width: 806px;
     max-height: 406px;
 }
@@ -152,7 +152,7 @@ header .container, header .row {
     margin: auto;
     padding: 0;
     width: 100%;
-    height: 400px; /* TODO static size used for testing, will have to be made more responsive down the line */
+    height: 400px;
     max-width: 806px;
     max-height: 406px;
 }
