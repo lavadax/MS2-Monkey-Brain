@@ -217,6 +217,16 @@ The initial plan was to use a canvas as a game area, however it quickly became c
 
 ### Validation
 
+As the first part of validation, I decided to validate the CSS files using [jigsaw](https://jigsaw.w3.org/css-validator/), as any potential errors would be quick and easy to fix.  
+Both CSS files came back clean without any errors.  
+![style.css validation](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/Style-validation.png)  
+![themes.css validation](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/Themes-validation.png)  
+  
+Moving on, I ran my html through the [markup validator](https://validator.w3.org) by opening my page and copying the html code, as some of it is applied by javascript.  
+I used the game code as a first test, which unfortunately returned the same code 4 times, along with a warning which can be seen below.   
+![first game validation](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/Game-validation-1.png)
+
+
 ### Testing User Stories
 
 #### First Time Visitor goals
@@ -269,3 +279,5 @@ Project Link: [https://github.com/lavadax/MS2-Monkey-Brain](https://github.com/l
 * [stackoverflow.com - localstorage](https://stackoverflow.com/questions/2989284/what-is-the-max-size-of-localstorage-values): for space limitations on localStorage.  
 * [stackoverflow.com - js var clipboard](https://stackoverflow.com/questions/33855641/copy-output-of-a-javascript-variable-to-the-clipboard): for the basis of the export function.  
 * [dev.to/zigabrencic](https://dev.to/zigabrencic/web-browser-local-storage-16jh): for the localStorage check. 
+* [jigsaw.w3.org](https://jigsaw.w3.org/css-validator/): for validating css files.  
+* [validator.w3.org](https://validator.w3.org): for validating html files
