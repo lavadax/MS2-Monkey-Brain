@@ -606,8 +606,21 @@ function startIntro() {
     // Run certain functions at specific points in the intro
     }).onchange(function() {
         switch(this._currentStep) {
+            // case 2 & 5 checks are in place, in case someone backtracks in the intro
+            case 2:
+                gameStop();
+                break;
             case 3:
-                gameSetup(circles);
+                // if statement in case someone backtracks from step 4 to 3
+                if (!gameRunning) {
+                    gameSetup(circles);
+                }
+                break;
+            case 5:
+                setupGameClick();
+                currentCircle = 0;
+                $("text").not(":first()").show();
+                $("circle").not(":first()").unbind();
                 break;
             case 6:
                 gameStart();
