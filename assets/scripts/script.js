@@ -640,13 +640,22 @@ function importData() {
     let confirm = prompt("Paste your save data below and then click OK to import your data.");
     // Very basic data validation
     let isValid = confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "[" && confirm.charAt(4) === "\\" && confirm.charAt(5) === `"`;
-    // Update localStorage if data is valid
+    let isValidCleared = confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "]" && confirm.charAt(4) === `"` && confirm.charAt(5) === "," && confirm.charAt(6) === "0";
+        // Update localStorage if data is valid
         if (isValid) {
             localStorage.setItem("history", JSON.parse(confirm)[0]);
             localStorage.setItem("record", JSON.parse(confirm)[1]);
-            localStorage.setItem("theme",JSON.parse(confirm)[2]);
+            localStorage.setItem("theme", JSON.parse(confirm)[2]);
             // Update local variables with localStorage data
             checkStorage();
+        // Update localStorage with empty play data if data is valid
+        } else if (isValidCleared) {
+            console.log("clearing");
+            dailyAttempts = 0;
+            hist = [];
+            localStorage.removeItem("history");
+            localStorage.removeItem("record");
+            localStorage.setItem("theme", JSON.parse(confirm)[2]);
         // Return when import is empty or user clicked cancel
         } else if (confirm === null || confirm === "") {
             return;
