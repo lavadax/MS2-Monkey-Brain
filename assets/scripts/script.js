@@ -638,34 +638,38 @@ function startIntro() {
 // Import data into localStorage and other variables
 function importData() {
     let confirm = prompt("Paste your save data below and then click OK to import your data.");
-    // Very basic data validation
-    let isValid = confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "[" && confirm.charAt(4) === "\\" && confirm.charAt(5) === `"`;
-    let isValidCleared = confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "]" && confirm.charAt(4) === `"` && confirm.charAt(5) === "," && confirm.charAt(6) === "0";
-        // Update localStorage if data is valid
-        if (isValid) {
-            localStorage.setItem("history", JSON.parse(confirm)[0]);
-            localStorage.setItem("record", JSON.parse(confirm)[1]);
+    let isValid;
+    let isValidCleared;
+    // Return when import is empty or user clicked cancel
+    if (confirm == null || confirm === "") {
+        return;
+    // Update localStorage if data is valid
+    } else {
+        // Very basic data validation
+        isValid = confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "[" && confirm.charAt(4) === "\\" && confirm.charAt(5) === `"`;
+        isValidCleared = confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "]" && confirm.charAt(4) === `"` && confirm.charAt(5) === "," && confirm.charAt(6) === "0";
+    }
+    if (isValid) {
+        localStorage.setItem("history", JSON.parse(confirm)[0]);
+        localStorage.setItem("record", JSON.parse(confirm)[1]);
+        localStorage.setItem("theme", JSON.parse(confirm)[2]);
+        // Update local variables with localStorage data
+        checkStorage();
+    // Update localStorage with empty play data if data is valid
+    } else if (isValidCleared) {
+        if (prompt('This will clear out any previous records and play history. if you want to continue, please type "I confirm" in the bo below and press OK') === "I confirm") {
+            dailyAttempts = 0;
+            hist = [];
+            localStorage.removeItem("history");
+            localStorage.removeItem("record");
             localStorage.setItem("theme", JSON.parse(confirm)[2]);
-            // Update local variables with localStorage data
-            checkStorage();
-        // Update localStorage with empty play data if data is valid
-        } else if (isValidCleared) {
-            if (prompt('This will clear out any previous records and play history. if you want to continue, please type "I confirm" in the bo below and press OK') === "I confirm") {
-                dailyAttempts = 0;
-                hist = [];
-                localStorage.removeItem("history");
-                localStorage.removeItem("record");
-                localStorage.setItem("theme", JSON.parse(confirm)[2]);
-            } else {
-                alert("You've cancelled the data import.");
-            }
-        // Return when import is empty or user clicked cancel
-        } else if (confirm === null || confirm === "") {
-            return;
-        // Alert user that data is invalid
         } else {
-            alert("The imported save was invalid.");
+            alert("You've cancelled the data import.");
         }
+    // Alert user that data is invalid
+    } else {
+        alert("The imported save was invalid.");
+    }
 }
 
 // Update localstorage before extracting it for exporting to other device/browser
