@@ -286,7 +286,8 @@ In order to facilitate cross-platform and cross-browser progress, it is possible
 
 ### Functional Testing
   
-As the functional testing section is quite expansive, it has been given its own file [here.](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/functional-testing.md)
+As the functional testing section is quite expansive, it has been given its own file [here.](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/functional-testing.md)  
+As a few edits have been made to the javascript code during functional testing, it has been put through JSHint again, and no new errors have been added.  
 
 ### Accessibility Testing
 
