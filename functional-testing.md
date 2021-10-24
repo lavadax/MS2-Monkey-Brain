@@ -67,3 +67,19 @@ An additional data validation check was implemented for this scenario, allowing 
 Finishing a game with a better score than the previous high score updates the high score on the bottom of the page.  
 Finishing a game with a worse or the same score as the previous high score has no impact on the high score on the bottom of the page.  
   
+* More extensive data import testing follows below:  
+  
+Importing `["[]",0,"default"]` opens a confirmation dialog.  
+Clicking cancel on the confirmation dialog notifies the user of the cancellation.  
+Clicking OK on the confirmation dialog without typing in the text box notifies the user the import was cancelled.  
+Clicking OK on the confirmation dialog while adding the incorrect text in the text box notifies the user the import was cancelled.  
+Clicking OK on the confirmation dialog while adding "I confirm" in the text box clears the play history and doesn't affect the theme.  
+After add ing the required function in the import function, confirming now loads the requested theme after clearing the play history.
+  
+Importing `["[]",0,"test"]` opens a confirmation dialog.  
+This has the same result as the previous testing.  
+  
+Importing `["[]",0,"dark"]` opens a confirmation dialog.  
+This has the same result as the previous testing with 1 exception which is as follows.  
+Clicking OK on the confirmation dialog while adding "I confirm" in the text box clears the play history and loads the dark theme without further notifying the user.  
+  
