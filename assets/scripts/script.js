@@ -449,8 +449,15 @@ function checkStorage() {
     getHistory();
     getTheme();
     addTheme(theme);
-    if (hist) {
+    if (hist && hist.length > 0) {
+        if (localStorage.getItem("record")) {
+            record = localStorage.getItem("record");
+        }
         for (let dailyData of hist) {
+            // Update record if daily record is higher (extra check for import)
+            if (dailyData[2] > record) {
+                record = dailyData[2];
+            }
             /* If data for today exists,
             update daily vars based on previous data, otherwise keep as 0 */
             if (dailyData[0] === localDate) {
@@ -459,11 +466,9 @@ function checkStorage() {
                 break;
             }
         }
-    }
-    if (localStorage.getItem("record")) {
-        record = localStorage.getItem("record");
         // Return value is used to check whether intro.js should autorun or not
-        return false; 
+        localStorage.setItem("record", record);
+        return false;
     } else {
         return true;
     }
@@ -539,7 +544,7 @@ function initGame() {
             <button id="history">History</button>
         </div>
         <svg id="game-area"></svg>
-        <p id="score-text">Highest achieved number: <span id="record">${record}</span></p>
+        <p id="score-text">Highest achieved number:&nbsp;<span id="record">${record}</span></p>
         `
     );
     // Set up event listeners & apply theme
@@ -565,7 +570,7 @@ function initHistory() {
             <button id="game">Game</button>
         </div>
         <canvas id="chart-area"></canvas>
-        <p id="score-text">Highest achieved number: <span id="record">${record}</span></p>
+        <p id="score-text">Highest achieved number:&nbsp;<span id="record">${record}</span></p>
         `
     );
     // Set up event listeners & apply theme
@@ -606,8 +611,21 @@ function startIntro() {
     // Run certain functions at specific points in the intro
     }).onchange(function() {
         switch(this._currentStep) {
+            // case 2 & 5 checks are in place, in case someone backtracks in the intro
+            case 2:
+                gameStop();
+                break;
             case 3:
-                gameSetup(circles);
+                // if statement in case someone backtracks from step 4 to 3
+                if (!gameRunning) {
+                    gameSetup(circles);
+                }
+                break;
+            case 5:
+                setupGameClick();
+                currentCircle = 0;
+                $("text").not(":first()").show();
+                $("circle").not(":first()").unbind();
                 break;
             case 6:
                 gameStart();
@@ -625,22 +643,50 @@ function startIntro() {
 // Import data into localStorage and other variables
 function importData() {
     let confirm = prompt("Paste your save data below and then click OK to import your data.");
-    // Very basic data validation
-    let isValid = confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "[" && confirm.charAt(4) === "\\" && confirm.charAt(5) === `"`;
+    let isValid;
+    let isValidCleared;
+    let importJson;
+    let validRecord;
+    let validTheme;
+    // Return when import is empty or user clicked cancel
+    if (confirm == null || confirm === "") {
+        return;
+    } else {
+        // Very basic data validation
+        isValid = confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "[" && confirm.charAt(4) === "\\" && confirm.charAt(5) === `"`;
+        isValidCleared = confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "]" && confirm.charAt(4) === `"` && confirm.charAt(5) === "," && confirm.charAt(6) === "0";
+        importJson = JSON.parse(confirm);
+        validRecord = typeof importJson[1] === "number";
+        validTheme = importJson[2] === "default" || importJson[2] === "dark";
+    }
     // Update localStorage if data is valid
-        if (isValid) {
-            localStorage.setItem("history", JSON.parse(confirm)[0]);
-            localStorage.setItem("record", JSON.parse(confirm)[1]);
-            localStorage.setItem("theme",JSON.parse(confirm)[2]);
-            // Update local variables with localStorage data
+    if (isValid && validRecord && validTheme) {
+        localStorage.setItem("history", importJson[0]);
+        localStorage.setItem("record", importJson[1]);
+        localStorage.setItem("theme", importJson[2]);
+        dailyAttempts = 0;
+        dailyRecord = 0;
+        // Update local variables with localStorage data
+        checkStorage();
+        window.location.reload();
+    // Update localStorage with empty play data if data is valid
+    } else if (isValidCleared && validRecord && validTheme) {
+        if (prompt('This will clear out any previous records and play history. if you want to continue, please type "I confirm" in the bo below and press OK') === "I confirm") {
+            dailyAttempts = 0;
+            dailyRecord = 0;
+            hist = [];
+            localStorage.removeItem("history");
+            localStorage.removeItem("record");
+            localStorage.setItem("theme", importJson[2]);
             checkStorage();
-        // Return when import is empty or user clicked cancel
-        } else if (confirm === null || confirm === "") {
-            return;
-        // Alert user that data is invalid
+            window.location.reload();
         } else {
-            alert("The imported save was invalid.");
+            alert("You've cancelled the data import.");
         }
+    // Alert user that data is invalid
+    } else {
+        alert("The imported save was invalid.");
+    }
 }
 
 // Update localstorage before extracting it for exporting to other device/browser
