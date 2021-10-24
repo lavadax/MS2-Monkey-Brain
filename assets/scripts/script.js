@@ -646,6 +646,7 @@ function importData() {
     let isValid;
     let isValidCleared;
     let importJson;
+    let validRecord;
     let validTheme;
     // Return when import is empty or user clicked cancel
     if (confirm == null || confirm === "") {
@@ -655,10 +656,11 @@ function importData() {
         isValid = confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "[" && confirm.charAt(4) === "\\" && confirm.charAt(5) === `"`;
         isValidCleared = confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "]" && confirm.charAt(4) === `"` && confirm.charAt(5) === "," && confirm.charAt(6) === "0";
         importJson = JSON.parse(confirm);
+        validRecord = typeof importJson[1] === "number";
         validTheme = importJson[2] === "default" || importJson[2] === "dark";
     }
     // Update localStorage if data is valid
-    if (isValid && validTheme) {
+    if (isValid && validRecord && validTheme) {
         localStorage.setItem("history", importJson[0]);
         localStorage.setItem("record", importJson[1]);
         localStorage.setItem("theme", importJson[2]);
@@ -668,7 +670,7 @@ function importData() {
         checkStorage();
         window.location.reload();
     // Update localStorage with empty play data if data is valid
-    } else if (isValidCleared && validTheme) {
+    } else if (isValidCleared && validRecord && validTheme) {
         if (prompt('This will clear out any previous records and play history. if you want to continue, please type "I confirm" in the bo below and press OK') === "I confirm") {
             dailyAttempts = 0;
             dailyRecord = 0;
