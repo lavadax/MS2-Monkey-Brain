@@ -61,8 +61,9 @@ Clicking OK while the text field is empty, or clicking cancel closes the confirm
 Clicking OK after pasting valid save data in the text field will import the save data and change the theme according to the imported data.  
 Clicking OK after pasting invalid save data will notify the user the data was invalid.  
 Clicking OK after pasting invalid save data while the first 6 characters are the expected characters will import the invalid data and will potentially apply a non-existing theme.  
+Clicking OK after pasting valid data with no play history counts as invalid data.  
+An additional data validation check was implemented for this scenario, allowing the importing of empty play data, effectively clearing the play history and applying the requested theme.
   
 Finishing a game with a better score than the previous high score updates the high score on the bottom of the page.  
 Finishing a game with a worse or the same score as the previous high score has no impact on the high score on the bottom of the page.  
   
-<!-- TODO add functional testing of history page with example import data -->
