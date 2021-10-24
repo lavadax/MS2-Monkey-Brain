@@ -83,3 +83,14 @@ Importing `["[]",0,"dark"]` opens a confirmation dialog.
 This has the same result as the previous testing with 1 exception which is as follows.  
 Clicking OK on the confirmation dialog while adding "I confirm" in the text box clears the play history and loads the dark theme without further notifying the user.  
   
+Importing `["[[\"2021-09-15\",1,0]]",0,"default"]` without any previous play history updates localStorage with the imported data.  
+The history page accurately represents the single day data.
+  
+Importing `["[[\"2021-09-15\",1,0]]",0,"default"]` with previous play history updates localStorage with  the imported data.  
+The history page accurately represents the single day data.  
+Importing `["[[\"2021-09-15\",1,0]]",0,"default"]` with play history of the current date updates localStorage with the imported data.  
+When opening the history tab, localStorage gets the previously collected play history of the current day added which is also shown in the history page.  
+After updating the import function with a daily record and attempts clear, this no longer happens and now the history page accurately represents the single day data.  
+  
+Importing `["[[\"2021-09-15\",5,6]]",0,"default"]` updates localStorage with the imported data.  
+the history page accurately represents the single day data, however the record paragraph is not updated, as the imported record is 0 despite the record for the imported date being 6.
