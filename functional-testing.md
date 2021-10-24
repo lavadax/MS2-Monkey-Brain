@@ -127,3 +127,10 @@ As this can be fixed by a more extended data validation, the issue is noted but 
   
 Importing `["[[\"2021-10-25\",1,0],[\"2021-10-24\",1,0]]",0,"default"]` updates the localStorage with the imported data, despite the dates being out of order.  
 As this can be fixed by a more extended data validation, the issue is noted but is currently not fixed.  
+  
+Importing `["[[\"2021-10-17\",1,0],[\"2021-10-18\",1,0],[\"2021-10-19\",1,0],[\"2021-10-20\",1,0],[\"2021-10-21\",1,0],[\"2021-10-22\",1,0],[\"2021-10-23\",1,0],[\"2021-10-24\",1,0]]",0,"default"]` updates the localStorage with the imported data.  
+The history page accurately represents the latest 7 dates when showing the history by day, shows 2 weeks when checking weekly, and 1 month when checking monthly.  
+  
+Adding more dates consistently shows the correct data in the history page.  
+  
+Importing is limited by the rudimentary data validation, but aside from the previously mentioned syntax errors, no major issues have been found.  
