@@ -650,12 +650,15 @@ function importData() {
             checkStorage();
         // Update localStorage with empty play data if data is valid
         } else if (isValidCleared) {
-            console.log("clearing");
-            dailyAttempts = 0;
-            hist = [];
-            localStorage.removeItem("history");
-            localStorage.removeItem("record");
-            localStorage.setItem("theme", JSON.parse(confirm)[2]);
+            if (prompt('This will clear out any previous records and play history. if you want to continue, please type "I confirm" in the bo below and press OK') === "I confirm") {
+                dailyAttempts = 0;
+                hist = [];
+                localStorage.removeItem("history");
+                localStorage.removeItem("record");
+                localStorage.setItem("theme", JSON.parse(confirm)[2]);
+            } else {
+                alert("You've cancelled the data import.");
+            }
         // Return when import is empty or user clicked cancel
         } else if (confirm === null || confirm === "") {
             return;
