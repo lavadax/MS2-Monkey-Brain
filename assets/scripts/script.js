@@ -657,12 +657,15 @@ function importData() {
         localStorage.setItem("history", importJson[0]);
         localStorage.setItem("record", importJson[1]);
         localStorage.setItem("theme", importJson[2]);
+        dailyAttempts = 0;
+        dailyRecord = 0;
         // Update local variables with localStorage data
         checkStorage();
     // Update localStorage with empty play data if data is valid
     } else if (isValidCleared && validTheme) {
         if (prompt('This will clear out any previous records and play history. if you want to continue, please type "I confirm" in the bo below and press OK') === "I confirm") {
             dailyAttempts = 0;
+            dailyRecord = 0;
             hist = [];
             localStorage.removeItem("history");
             localStorage.removeItem("record");
