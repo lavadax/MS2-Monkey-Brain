@@ -449,8 +449,15 @@ function checkStorage() {
     getHistory();
     getTheme();
     addTheme(theme);
-    if (hist) {
+    if (hist && hist.length > 0) {
+        if (localStorage.getItem("record")) {
+            record = localStorage.getItem("record");
+        }
         for (let dailyData of hist) {
+            // Update record if daily record is higher (extra check for import)
+            if (dailyData[2] > record) {
+                record = dailyData[2];
+            }
             /* If data for today exists,
             update daily vars based on previous data, otherwise keep as 0 */
             if (dailyData[0] === localDate) {
@@ -459,11 +466,9 @@ function checkStorage() {
                 break;
             }
         }
-    }
-    if (localStorage.getItem("record")) {
-        record = localStorage.getItem("record");
         // Return value is used to check whether intro.js should autorun or not
-        return false; 
+        localStorage.setItem("record", record);
+        return false;
     } else {
         return true;
     }
@@ -661,6 +666,7 @@ function importData() {
         dailyRecord = 0;
         // Update local variables with localStorage data
         checkStorage();
+        window.location.reload();
     // Update localStorage with empty play data if data is valid
     } else if (isValidCleared && validTheme) {
         if (prompt('This will clear out any previous records and play history. if you want to continue, please type "I confirm" in the bo below and press OK') === "I confirm") {
@@ -671,6 +677,7 @@ function importData() {
             localStorage.removeItem("record");
             localStorage.setItem("theme", importJson[2]);
             checkStorage();
+            window.location.reload();
         } else {
             alert("You've cancelled the data import.");
         }
