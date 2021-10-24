@@ -301,7 +301,13 @@ After Adding the aria-labels, the only issue is the built-in low contrast issue 
   
 ![second wave test](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/Wave-testing-2.png)  
   
-
+* Websiteplanet responsiveness test  
+  
+The first test using [website Planet](https://www.websiteplanet.com/webtools/responsive-checker/) made it clear how limited the responsiveness of the page is.
+  
+![first responsiveness test](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/Responsive-testing-1.png)  
+  
+Further investigation showed that any screen with a width of less than 445 pixels would have issues with the buttons in the header.
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -346,4 +352,5 @@ Project Link: [https://github.com/lavadax/MS2-Monkey-Brain](https://github.com/l
 * [dev.to/zigabrencic](https://dev.to/zigabrencic/web-browser-local-storage-16jh): for the localStorage check. 
 * [jigsaw.w3.org](https://jigsaw.w3.org/css-validator/): for validating css files.  
 * [validator.w3.org](https://validator.w3.org): for validating html files.  
-* [wave accessibility test](https://wave.webaim.org/): for accessibility testing.
+* [wave accessibility test](https://wave.webaim.org/): for accessibility testing.  
+* [Website planet responsiveness test](https://www.websiteplanet.com/webtools/responsive-checker/): for responsiveness testing.
