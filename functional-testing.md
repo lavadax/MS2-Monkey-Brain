@@ -84,7 +84,7 @@ This has the same result as the previous testing with 1 exception which is as fo
 Clicking OK on the confirmation dialog while adding "I confirm" in the text box clears the play history and loads the dark theme without further notifying the user.  
   
 Importing `["[[\"2021-09-15\",1,0]]",0,"default"]` without any previous play history updates localStorage with the imported data.  
-The history page accurately represents the single day data.
+The history page accurately represents the single day data.  
   
 Importing `["[[\"2021-09-15\",1,0]]",0,"default"]` with previous play history updates localStorage with  the imported data.  
 The history page accurately represents the single day data.  
@@ -94,4 +94,36 @@ After updating the import function with a daily record and attempts clear, this 
   
 Importing `["[[\"2021-09-15\",5,6]]",0,"default"]` updates localStorage with the imported data.  
 the history page accurately represents the single day data, however the record paragraph is not updated, as the imported record is 0 despite the record for the imported date being 6.  
-After adding a loop to confirm the record, updating the localStorage record at the end of the loop, and forcing a page reload upon importing, the page is now properly updated with the correct data.
+After adding a loop to confirm the record, updating the localStorage record at the end of the loop, and forcing a page reload upon importing, the page is now properly updated with the correct data.  
+  
+Importing `["[[\"1905-09-15\",5,6]]",0,"default"]` updates localStorage with the imported data.  
+The history page accurately represents the single day data.  
+  
+Importing `["[[\"1905-0-15\",5,6]]",0,"default"]` updates localStorage with the imported data.  
+Despite this being an invalid date, it is not part of the current data validation and thus passes validation.  
+Validation for this scenario might be implemented in the future.  
+  
+Importing `["[[\"1905-0-15\",5,6]]",,"default"]` throws a syntaxError in the console.  
+As this can be fixed by a more extended data validation, the issue is noted but is currently not fixed.  
+  
+Importing `["[[\"1905-0-15\",5,6]]","default"]` notifies the user they imported invalid data and doesn't change the localStorage, or html.  
+  
+Importing `["[[\"1905-0-15\",a,6]]",0,"default"]` throws a syntaxError in the console.  
+Reloading the page at this point will break the page until the history localStorage item is deleted and the page reloaded.  
+As this can be fixed by a more extended data validation, the issue is noted but is currently not fixed.  
+  
+Importing `["[[\"1905-0-15\",5,6]]","a","default"]` updates the localStorage with the imported data, including the all-time record of "a".  
+Adding a typeof check on the all-time record fixes this issue.  
+    
+Importing `["[[\"1905-0-15\",5,6]]",a,"default"]` throws a syntaxError in the console.  
+As this can be fixed by a more extended data validation, the issue is noted but is currently not fixed.  
+  
+Importing `["[[\"2021-10-24\",1,0],[\"2021-10-24\",1,0]]",0,"default"]` updates the localStorage with the imported data, regardless of it being duplicated.  
+As this can be fixed by a more extended data validation, the issue is noted but is currently not fixed.  
+  
+Important note: this was tested on 2021-10-24.
+Importing `["[[\"2021-10-24\",1,0],[\"2021-10-25\",1,0]]",0,"default"]` updates the localStorage with the imported data, and later changes it to `["[[\"2021-10-24\",1,0],[\"2021-10-25\",1,0],[\"2021-10-24\",1,0]]",0,"default"]`, as the code assumes that if the current date is present, it will be the last date in the array.  
+As this can be fixed by a more extended data validation, the issue is noted but is currently not fixed.  
+  
+Importing `["[[\"2021-10-25\",1,0],[\"2021-10-24\",1,0]]",0,"default"]` updates the localStorage with the imported data, despite the dates being out of order.  
+As this can be fixed by a more extended data validation, the issue is noted but is currently not fixed.  
