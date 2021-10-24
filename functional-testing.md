@@ -93,4 +93,5 @@ When opening the history tab, localStorage gets the previously collected play hi
 After updating the import function with a daily record and attempts clear, this no longer happens and now the history page accurately represents the single day data.  
   
 Importing `["[[\"2021-09-15\",5,6]]",0,"default"]` updates localStorage with the imported data.  
-the history page accurately represents the single day data, however the record paragraph is not updated, as the imported record is 0 despite the record for the imported date being 6.
+the history page accurately represents the single day data, however the record paragraph is not updated, as the imported record is 0 despite the record for the imported date being 6.  
+After adding a loop to confirm the record, updating the localStorage record at the end of the loop, and forcing a page reload upon importing, the page is now properly updated with the correct data.
