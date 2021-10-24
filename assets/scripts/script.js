@@ -640,29 +640,34 @@ function importData() {
     let confirm = prompt("Paste your save data below and then click OK to import your data.");
     let isValid;
     let isValidCleared;
+    let importJson;
+    let validTheme;
     // Return when import is empty or user clicked cancel
     if (confirm == null || confirm === "") {
         return;
-    // Update localStorage if data is valid
     } else {
         // Very basic data validation
         isValid = confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "[" && confirm.charAt(4) === "\\" && confirm.charAt(5) === `"`;
         isValidCleared = confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "]" && confirm.charAt(4) === `"` && confirm.charAt(5) === "," && confirm.charAt(6) === "0";
+        importJson = JSON.parse(confirm);
+        validTheme = importJson[2] === "default" || importJson[2] === "dark";
     }
-    if (isValid) {
-        localStorage.setItem("history", JSON.parse(confirm)[0]);
-        localStorage.setItem("record", JSON.parse(confirm)[1]);
-        localStorage.setItem("theme", JSON.parse(confirm)[2]);
+    // Update localStorage if data is valid
+    if (isValid && validTheme) {
+        localStorage.setItem("history", importJson[0]);
+        localStorage.setItem("record", importJson[1]);
+        localStorage.setItem("theme", importJson[2]);
         // Update local variables with localStorage data
         checkStorage();
     // Update localStorage with empty play data if data is valid
-    } else if (isValidCleared) {
+    } else if (isValidCleared && validTheme) {
         if (prompt('This will clear out any previous records and play history. if you want to continue, please type "I confirm" in the bo below and press OK') === "I confirm") {
             dailyAttempts = 0;
             hist = [];
             localStorage.removeItem("history");
             localStorage.removeItem("record");
-            localStorage.setItem("theme", JSON.parse(confirm)[2]);
+            localStorage.setItem("theme", importJson[2]);
+            checkStorage();
         } else {
             alert("You've cancelled the data import.");
         }
