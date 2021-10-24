@@ -291,6 +291,17 @@ As a few edits have been made to the javascript code during functional testing, 
 
 ### Accessibility Testing
 
+* Wave accessibility test  
+  
+The first test using [Wave](https://wave.webaim.org/) pointed out the footer links were missing screenreader labels.  
+  
+![first wave test](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/Wave-testing-1.png)  
+  
+After Adding the aria-labels, the only issue is the built-in low contrast issue from introJS.  
+  
+![second wave test](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/Wave-testing-2.png)  
+  
+
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -334,4 +345,5 @@ Project Link: [https://github.com/lavadax/MS2-Monkey-Brain](https://github.com/l
 * [stackoverflow.com - js var clipboard](https://stackoverflow.com/questions/33855641/copy-output-of-a-javascript-variable-to-the-clipboard): for the basis of the export function.  
 * [dev.to/zigabrencic](https://dev.to/zigabrencic/web-browser-local-storage-16jh): for the localStorage check. 
 * [jigsaw.w3.org](https://jigsaw.w3.org/css-validator/): for validating css files.  
-* [validator.w3.org](https://validator.w3.org): for validating html files
+* [validator.w3.org](https://validator.w3.org): for validating html files.  
+* [wave accessibility test](https://wave.webaim.org/): for accessibility testing.
