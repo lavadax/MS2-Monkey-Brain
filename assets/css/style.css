@@ -225,6 +225,20 @@ footer p {
     }
 }
 
+@media screen and (max-width: 450.8px) {
+    #help-button, #theme-button, #settings-button {
+        font-size: 12px;
+        height: 50px;
+    }
+
+    #help-button {
+        width: 38px;
+    }
+
+    #theme-button, #settings-button {
+        width: 73px;
+    }
+}
 
 @media screen and (max-width: 340.8px) {
 
