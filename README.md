@@ -307,7 +307,17 @@ The first test using [website Planet](https://www.websiteplanet.com/webtools/res
   
 ![first responsiveness test](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/Responsive-testing-1.png)  
   
-Further investigation showed that any screen with a width of less than 445 pixels would have issues with the buttons in the header.
+Further investigation showed that any screen with a width of less than 445 pixels would have issues with the buttons in the header.  
+After adding more responsiveness to the header, it is now responsive for screen widths of 359px and up.  
+  
+At this point I tested the site on the most common web browsers:
+[Opera](https://www.opera.com)  
+[Opera GX](https://www.opera.com/gx)  
+[Google Chrome](https://www.google.com/chrome)  
+[Microsoft Edge](www.microsoft.com/edge)  
+[Brave](https://brave.com)  
+  
+Lastly, after all the modifications made to the code, I ran all HTML, CSS and javascript through another validation check, which they all passed.  
 
 <!-- CONTRIBUTING -->
 ## Contributing
