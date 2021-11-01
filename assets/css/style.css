@@ -144,7 +144,7 @@ header .container, header .row {
     width: 100%;
     height: 400px;
     max-width: 806px;
-    max-height: 406px;
+    max-height: 400px;
 }
 
 #chart-area {
@@ -154,7 +154,7 @@ header .container, header .row {
     width: 100%;
     height: 400px;
     max-width: 806px;
-    max-height: 406px;
+    max-height: 400px;
 }
 
 #score-text {
