@@ -654,15 +654,15 @@ function importData() {
     } else {
         // Very basic data validation
         isValid = confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "[" && confirm.charAt(4) === "\\" && confirm.charAt(5) === `"`;
-        isValidCleared = confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "]" && confirm.charAt(4) === `"` && confirm.charAt(5) === "," && confirm.charAt(6) === "0";
+        isValidCleared = confirm.charAt(0) === "[" && confirm.charAt(1) === `"` && confirm.charAt(2) === "[" && confirm.charAt(3) === "]" && confirm.charAt(4) === `"` && confirm.charAt(5) === ",";
         importJson = JSON.parse(confirm);
-        validRecord = typeof importJson[1] === "number";
+        validRecord = isFinite(Number(importJson[1]));
         validTheme = importJson[2] === "default" || importJson[2] === "dark";
     }
     // Update localStorage if data is valid
     if (isValid && validRecord && validTheme) {
         localStorage.setItem("history", importJson[0]);
-        localStorage.setItem("record", importJson[1]);
+        localStorage.setItem("record", Number(importJson[1]));
         localStorage.setItem("theme", importJson[2]);
         dailyAttempts = 0;
         dailyRecord = 0;
