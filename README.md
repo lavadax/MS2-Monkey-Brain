@@ -203,7 +203,7 @@ x.0.0 Edits are reserved for major milestones explained below.
 
 0.1.0: Project inception: Files are created, basic file tree is in place, README and license are initialized.  
 0.2.0: Basic usage: Basic HTML and CSS are up and running on PC screens without major issues.  
-0.3.0: Basic responsiveness: Page is responsive for all screensizes without major issues.  
+0.3.0: Basic responsiveness: Page is responsive for all screen sizes without major issues.  
 1.0.0: Basic javascript: Basic javascript is up and running, completing minimum goals of the project.  
 2.0.0: Save state: Added usage of local storage and save export.  
 3.0.0: More options: expansion on 2.0.0 by adding options on page themes.  
@@ -269,7 +269,7 @@ Game code:
 History code:  
 ![history validation](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/History-validation.png)  
   
-Lastly, there's the javascript code. for this I used [JSHint](https://jshint.com) to validate the code.  
+Lastly, there's the javascript code. For this I used [JSHint](https://jshint.com) to validate the code.  
 After removing any mention of ES6 features, and letting JSHint assume jQuery was being used, I'm left with 24 warnings and 2 undefined variables.  
 The variables were actually native chartJS and introJS variables, so these can be ignored.  
 
@@ -322,7 +322,7 @@ As a few edits have been made to the javascript code during functional testing, 
 
 * Wave accessibility test  
   
-The first test using [Wave](https://wave.webaim.org/) pointed out the footer links were missing screenreader labels.  
+The first test using [Wave](https://wave.webaim.org/) pointed out the footer links were missing screen reader labels.  
   
 ![first wave test](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/Wave-testing-1.png)  
   
@@ -353,7 +353,7 @@ Lastly, after all the modifications made to the code, I ran all HTML, CSS and ja
 <!-- CONTRIBUTING -->
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
