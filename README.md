@@ -1,6 +1,3 @@
-<!-- PROJECT SHIELDS TODO-->
-
-
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
@@ -79,10 +76,37 @@
 
 
 <!-- ABOUT THE PROJECT-->
-## About The Project
+## About The Project  
 
-<!-- TODO add screenshots of finished project-->
-
+Below you can see a few screenshots of the finished project.  
+  
+Intro during first page visit:  
+  
+![desktop-intro](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Desktop-intro.png) ![mobile-intro](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Mobile-intro.png)  
+  
+Game page after intro:  
+  
+![desktop-clear](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Desktop-clear.png) ![mobile-clear](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Mobile-clear.png)  
+  
+History page without game history:  
+  
+![desktop-no-history](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Desktop-no-history.png) ![mobile-no-history](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Mobile-no-history.png)  
+  
+Game page after game is started:  
+  
+![desktop-game](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Desktop-game.png) ![mobile-game](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Mobile-game.png)  
+  
+Daily history with sample data:  
+  
+![desktop-day](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Desktop-day.png) ![mobile-day](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Mobile-day.png)  
+  
+Weekly history with sample data:  
+  
+![desktop-week](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Desktop-week.png) ![mobile-week](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Mobile-week.png)  
+  
+Monthly history with sample data:  
+  
+![desktop-month](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Desktop-month.png) ![mobile-month](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Mobile-month.png)  
 
 ### Built With
 
@@ -147,6 +171,7 @@ $ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
 Click [Here](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository#cloning-a-repository-to-github-desktop) to retrieve pictures for some of the buttons and more detailed explanations of the above process.
 
 
+
 <!-- USAGE EXAMPLES -->
 ## Usage
 
@@ -166,6 +191,8 @@ All wireframes are in a single file and can be found [here](https://github.com/l
 * As a returning user, I want to easily return to where I left off previously.
 * As a returning user, I want to easily check my progress so far.
 * As a returning user, I want the possibility of accessing my previous data on new devices.
+
+
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -211,6 +238,8 @@ Based on the results, I can reasonably assume that if someone plays 1000 times, 
 Even after the exact syntax of the localStorage has changed, I would still estimate the browser would have roughly 500 days worth of space.
 
 The initial plan was to use a canvas as a game area, however it quickly became clear that hooking event listeners to auto-generated objects would require a lot of effort, so I changed my focus to SVG instead.
+
+
 
 <!-- TESTING -->
 ## Testing
@@ -318,6 +347,8 @@ At this point I tested the site on the most common web browsers:
 [Brave](https://brave.com)  
   
 Lastly, after all the modifications made to the code, I ran all HTML, CSS and javascript through another validation check, which they all passed.  
+
+
 
 <!-- CONTRIBUTING -->
 ## Contributing
