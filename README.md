@@ -1,6 +1,3 @@
-<!-- PROJECT SHIELDS TODO-->
-
-
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
@@ -79,10 +76,37 @@
 
 
 <!-- ABOUT THE PROJECT-->
-## About The Project
+## About The Project  
 
-<!-- TODO add screenshots of finished project-->
-
+Below you can see a few screenshots of the finished project.  
+  
+Intro during first page visit:  
+  
+![desktop-intro](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Desktop-intro.png) ![mobile-intro](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Mobile-intro.png)  
+  
+Game page after intro:  
+  
+![desktop-clear](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Desktop-clear.png) ![mobile-clear](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Mobile-clear.png)  
+  
+History page without game history:  
+  
+![desktop-no-history](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Desktop-no-history.png) ![mobile-no-history](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Mobile-no-history.png)  
+  
+Game page after game is started:  
+  
+![desktop-game](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Desktop-game.png) ![mobile-game](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Mobile-game.png)  
+  
+Daily history with sample data:  
+  
+![desktop-day](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Desktop-day.png) ![mobile-day](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Mobile-day.png)  
+  
+Weekly history with sample data:  
+  
+![desktop-week](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Desktop-week.png) ![mobile-week](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Mobile-week.png)  
+  
+Monthly history with sample data:  
+  
+![desktop-month](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Desktop-month.png) ![mobile-month](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/about/Mobile-month.png)  
 
 ### Built With
 
@@ -147,6 +171,7 @@ $ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
 Click [Here](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository#cloning-a-repository-to-github-desktop) to retrieve pictures for some of the buttons and more detailed explanations of the above process.
 
 
+
 <!-- USAGE EXAMPLES -->
 ## Usage
 
@@ -167,6 +192,8 @@ All wireframes are in a single file and can be found [here](https://github.com/l
 * As a returning user, I want to easily check my progress so far.
 * As a returning user, I want the possibility of accessing my previous data on new devices.
 
+
+
 <!-- ROADMAP -->
 ## Roadmap
 
@@ -176,7 +203,7 @@ x.0.0 Edits are reserved for major milestones explained below.
 
 0.1.0: Project inception: Files are created, basic file tree is in place, README and license are initialized.  
 0.2.0: Basic usage: Basic HTML and CSS are up and running on PC screens without major issues.  
-0.3.0: Basic responsiveness: Page is responsive for all screensizes without major issues.  
+0.3.0: Basic responsiveness: Page is responsive for all screen sizes without major issues.  
 1.0.0: Basic javascript: Basic javascript is up and running, completing minimum goals of the project.  
 2.0.0: Save state: Added usage of local storage and save export.  
 3.0.0: More options: expansion on 2.0.0 by adding options on page themes.  
@@ -212,6 +239,8 @@ Even after the exact syntax of the localStorage has changed, I would still estim
 
 The initial plan was to use a canvas as a game area, however it quickly became clear that hooking event listeners to auto-generated objects would require a lot of effort, so I changed my focus to SVG instead.
 
+
+
 <!-- TESTING -->
 ## Testing
 
@@ -240,7 +269,7 @@ Game code:
 History code:  
 ![history validation](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/History-validation.png)  
   
-Lastly, there's the javascript code. for this I used [JSHint](https://jshint.com) to validate the code.  
+Lastly, there's the javascript code. For this I used [JSHint](https://jshint.com) to validate the code.  
 After removing any mention of ES6 features, and letting JSHint assume jQuery was being used, I'm left with 24 warnings and 2 undefined variables.  
 The variables were actually native chartJS and introJS variables, so these can be ignored.  
 
@@ -293,7 +322,7 @@ As a few edits have been made to the javascript code during functional testing, 
 
 * Wave accessibility test  
   
-The first test using [Wave](https://wave.webaim.org/) pointed out the footer links were missing screenreader labels.  
+The first test using [Wave](https://wave.webaim.org/) pointed out the footer links were missing screen reader labels.  
   
 ![first wave test](https://github.com/lavadax/MS2-Monkey-Brain/blob/master/documentation/Wave-testing-1.png)  
   
@@ -319,10 +348,12 @@ At this point I tested the site on the most common web browsers:
   
 Lastly, after all the modifications made to the code, I ran all HTML, CSS and javascript through another validation check, which they all passed.  
 
+
+
 <!-- CONTRIBUTING -->
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
